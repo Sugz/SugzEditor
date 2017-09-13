@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="SugzEditor.Views.ToolbarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SugzEditor.Views"
+             xmlns:sgzcontrols="clr-namespace:SugzTools.Controls;assembly=SugzTools"
+             mc:Ignorable="d"
+             d:DesignHeight="30"
+             d:DesignWidth="300">
+
+    <StackPanel Orientation="Horizontal"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                WindowChrome.IsHitTestVisibleInChrome="True"
+                Height="30"
+                DataContext="{Binding Source={StaticResource Locator}}">
+        <ToggleButton Content="{DynamicResource Treeview_20x}"
+                      IsChecked="{Binding Explorer.ShowExplorer}" 
+                      Style="{DynamicResource ToolbarCheckButtonStyle}" />
+        <sgzcontrols:SgzButton Content="{DynamicResource NewFile_20x}"
+                               Style="{DynamicResource ToolbarButtonStyle}"
+                               ToolTip="New File (Ctrl+N)" />
+        <sgzcontrols:SgzButton Content="{DynamicResource OpenFile_20x}"
+                               Style="{DynamicResource ToolbarButtonStyle}"
+                               ToolTip="Add File (Ctrl+Shift+N)" />
+        <sgzcontrols:SgzButton Content="{DynamicResource OpenFolder_20x}"
+                               Style="{DynamicResource ToolbarButtonStyle}"
+                               ToolTip="Add Folder (Ctrl+Shift+F)" />
+    </StackPanel>
+
+
+</UserControl>
