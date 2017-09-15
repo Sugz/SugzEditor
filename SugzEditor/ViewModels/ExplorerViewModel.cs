@@ -13,17 +13,25 @@ namespace SugzEditor.ViewModels
 {
     public class ExplorerViewModel : ViewModelBase
     {
-        private Timer _Timer = new Timer(10);
+        /*
+        #region Fields
+
 
         private double _OldExplorerWidth = 300;
         private double _ExplorerWidth = 300;
         private GridLength _ExplorerGridWidth = new GridLength(300);
-        private Visibility _ExplorerVisibilty;
         private bool _ShowExplorer = true;
+        private bool _ShowToolbar = true;
+
+        #endregion Fields
+
+
+
+        #region Properties
 
 
         /// <summary>
-        /// 
+        /// Get or set the explorer grid column width
         /// </summary>
         public GridLength ExplorerGridWidth
         {
@@ -36,20 +44,9 @@ namespace SugzEditor.ViewModels
                     _OldExplorerWidth = value.Value;
             }
         }
-        
 
         /// <summary>
-        /// 
-        /// </summary>
-        public Visibility ExplorerVisibilty
-        {
-            get => _ExplorerVisibilty;
-            set => Set(ref _ExplorerVisibilty, value);
-        }
-
-
-        /// <summary>
-        /// 
+        /// Get or set the explorer visibility
         /// </summary>
         public bool ShowExplorer
         {
@@ -57,24 +54,38 @@ namespace SugzEditor.ViewModels
             set
             {
                 Set(ref _ShowExplorer, value);
-                DoSomething();
+                ShowHideExplorer();
             }
+        }
+
+        /// <summary>
+        /// Get or set the toolbar visibility
+        /// </summary>
+        public bool ShowToolbar
+        {
+            get => _ShowToolbar;
+            set => Set(ref _ShowToolbar, value);
         }
 
 
 
-        private void DoSomething()
+        #endregion Properties
+
+
+
+        #region Methods
+
+
+        private void ShowHideExplorer()
         {
             if (_ExplorerWidth == 0)
-            {
-                ExplorerVisibilty = Visibility.Visible;
                 ExplorerGridWidth = new GridLength(_OldExplorerWidth);
-            }
             else
-            {
-                ExplorerVisibilty = Visibility.Collapsed;
                 ExplorerGridWidth = new GridLength(0);
-            }
-        }
+        } 
+
+
+        #endregion Methods
+        */
     }
 }

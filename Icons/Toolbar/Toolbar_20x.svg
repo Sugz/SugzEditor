@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+    <path id="ToolbarOutline" d="M20,3L0,3L0,18L20,18L20,3Z" style="fill:rgb(235,235,235);"/>
+    <path id="ToolbarBg" d="M19,17L1,17L1,4L19,4L19,5L4,5L4,16L19,16L19,17Z" style="fill:rgb(66,66,66);"/>
+    <path id="ToolbarFile" d="M11,14L5,14L5,7L9,7L11,9L11,14ZM8,8L6,8L6,13L10,13L10,10L8,10L8,8Z" style="fill:rgb(66,66,66);"/>
+    <path id="ToolbarSave" d="M19,14L13,14L13,7L14,7L14,9L15,9L15,7L18,7L19,8L19,14Z" style="fill:rgb(66,66,66);"/>
+    <path id="ToolbarHoles" d="M2,14L3,14L3,15L2,15L2,14ZM2,10L3,10L3,11L2,11L2,10ZM3,6L3,7L2,7L2,6L3,6Z" style="fill:rgb(235,235,235);"/>
+</svg>

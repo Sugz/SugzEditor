@@ -4,16 +4,19 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:controls="clr-namespace:SugzEditor.Controls"
-                    xmlns:views="clr-namespace:SugzEditor.Views"
+                    xmlns:views="clr-namespace:SugzEditor.Views" 
+                    xmlns:sgzcontrols="clr-namespace:SugzTools.Controls;assembly=SugzTools" 
+                    xmlns:sgzconv="clr-namespace:SugzTools.Converters;assembly=SugzTools"
                     xmlns:ignore="http://www.galasoft.ch/ignore"
                     mc:Ignorable="d ignore"
                     Width="1280"
                     Height="720"
                     Title="SugzEditor"
-                    DataContext="{Binding Main, Source={StaticResource Locator}}">
+                    DataContext="{Binding Main, Source={StaticResource Locator}}" 
+                    Icon="Resources/SugzEditor.ico">
 
     <Window.Resources>
-
+        <sgzconv:InvertableBooleanToVisibilityConverter x:Key="BoolToVisibility" />
     </Window.Resources>
 
     <DockPanel Background="{DynamicResource MainBackground}"
@@ -21,21 +24,23 @@
         <DockPanel DockPanel.Dock="Top"
                    Background="{DynamicResource ToolbarBackground}"
                    VerticalAlignment="Top">
-            <views:MenusView DockPanel.Dock="Top" />
-            <views:ToolbarView DockPanel.Dock="Top" />
+            <views:MenusView DockPanel.Dock="Top" 
+                             Visibility="{Binding Main.ShowMenus, Converter={StaticResource BoolToVisibility}}" />
+            <views:ToolbarView DockPanel.Dock="Top" 
+                               Visibility="{Binding Main.ShowToolbar, Converter={StaticResource BoolToVisibility}}"/>
         </DockPanel>
         <Grid x:Name="mainGrid">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{Binding Explorer.ExplorerGridWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <ColumnDefinition Width="{Binding Main.ExplorerGridWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <views:ExplorerView x:Name="explorerView"
                                 DockPanel.Dock="Left"/>
 
             <!-- GridSplitter -->
-            <GridSplitter x:Name="gridSplitter"
-                          Grid.Column="0"
-                          Visibility="{Binding Explorer.ExplorerVisibilty}" />
+            <GridSplitter x:Name="gridSplitter" 
+                          Visibility="{Binding Main.ShowExplorer, Converter={StaticResource BoolToVisibility}}"/>
+
         </Grid>
 
     </DockPanel>

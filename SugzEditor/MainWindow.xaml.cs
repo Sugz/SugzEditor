@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using SugzEditor.ViewModels;
 using SugzEditor.Controls;
+using Microsoft.Practices.ServiceLocation;
 
 namespace SugzEditor
 {
@@ -15,7 +16,11 @@ namespace SugzEditor
         public MainWindow()
         {
             InitializeComponent();
-            Closing += (s, e) => ViewModelLocator.Cleanup();
+            Closing += (s, e) =>
+            {
+                ServiceLocator.Current.GetInstance<MainViewModel>().SaveConfig();
+                ViewModelLocator.Cleanup();
+            };
         }
     }
 }

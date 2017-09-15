@@ -11,38 +11,27 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                
+                <!--<Colors-->
                 <ResourceDictionary Source="/Themes/Dark/DarkColor.xaml" />
                 <ResourceDictionary Source="/Themes/Dark/DarkIcons.xaml" />
-                <!--<ResourceDictionary x:Name="Colors" Source="/Themes/Light/LightColor.xaml" />-->
-                <!--<ResourceDictionary x:Name="Icons" Source="/Themes/Light/LightIcons.xaml" />-->
+
+                <!--Controls-->
+                <ResourceDictionary Source="/Themes/Controls/Button.xaml" />
                 <ResourceDictionary Source="/Themes/Controls/ExplorerButton.xaml" />
+                <ResourceDictionary Source="/Themes/Controls/GridSplitter.xaml" />
                 <ResourceDictionary Source="/Themes/Controls/Menu.xaml" />
-                <ResourceDictionary Source="/Themes/Controls/SystemButton.xaml" />
-                <ResourceDictionary Source="/Themes/Controls/ToolbarButton.xaml" />
                 
-                
+                <!--Icons-->
+                <ResourceDictionary Source="/Themes/Icons/ExplorerIcons.xaml" />
+                <ResourceDictionary Source="/Themes/Icons/MenuIcons.xaml" />
+                <ResourceDictionary Source="/Themes/Icons/ToolbarIcons.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
 
+            
             <!--Global View Model Locator-->
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
-            
-            
-            <!-- GridSplitterTemplate -->
-            <Style x:Key="{x:Type GridSplitter}" TargetType="{x:Type GridSplitter}">
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="Opacity" Value="0" />
-                <Setter Property="HorizontalAlignment" Value="Right" />
-                <Setter Property="Width" Value="6" />
-                <Setter Property="Margin" Value="0,0,-3,0" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type GridSplitter}">
-                            <Border x:Name="Bd" Background="{TemplateBinding Background}" />
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            
             
         </ResourceDictionary>
     </Application.Resources>

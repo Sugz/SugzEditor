@@ -22,5 +22,65 @@ namespace SugzEditor.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsDarkTheme {
+            get {
+                return ((bool)(this["IsDarkTheme"]));
+            }
+            set {
+                this["IsDarkTheme"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowMenus {
+            get {
+                return ((bool)(this["ShowMenus"]));
+            }
+            set {
+                this["ShowMenus"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowToolbar {
+            get {
+                return ((bool)(this["ShowToolbar"]));
+            }
+            set {
+                this["ShowToolbar"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowExplorer {
+            get {
+                return ((bool)(this["ShowExplorer"]));
+            }
+            set {
+                this["ShowExplorer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowTabs {
+            get {
+                return ((bool)(this["ShowTabs"]));
+            }
+            set {
+                this["ShowTabs"] = value;
+            }
+        }
     }
 }

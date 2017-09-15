@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+    <path id="FileOutline" d="M6,2C6,2 6,11.88 6,17C6,18.657 7.343,20 9,20C11.362,20 14.638,20 17,20C18.657,20 20,18.657 20,17C20,13.022 20,6.5 20,6.5L15.5,2L6,2Z" style="fill:rgb(204,204,204);"/>
+    <path id="FileBg" d="M7,3C7,3 7,12.708 7,17C7,18.105 7.895,19 9,19C11.22,19 14.78,19 17,19C18.105,19 19,18.105 19,17C19,13.586 19,7 19,7L15,3L12.997,3L7,3Z" style="fill:rgb(77,77,77);"/>
+    <path id="FileFg" d="M8,4C8,4 8,13.797 8,17C8,17.552 8.448,18 9,18C10.916,18 15.084,18 17,18C17.552,18 18,17.552 18,17C18,14.467 18,8 18,8L14,8L14,4L8,4Z" style="fill:white;"/>
+    <path id="StarOutline" d="M5,2.879L5,0L8,0L8,2.879L10.036,0.843L12.157,2.964L10.121,5L13,5L13,8L10.121,8L12.157,10.036L10.036,12.157L8,10.121L8,13L5,13L5,10.121L2.964,12.157L0.843,10.036L2.879,8L0,8L0,5L2.879,5L0.843,2.964L2.964,0.843L5,2.879Z" style="fill:rgb(204,204,204);"/>
+    <path id="StarFg" d="M7,12L6,12L6,7.707L2.964,10.743L2.257,10.036L5.293,7L1,7L1,6L5.293,6L2.257,2.964L2.964,2.257L6,5.293L6,1L7,1L7,5.293L10.036,2.257L10.743,2.964L7.707,6L12,6L12,7L7.707,7L10.743,10.036L10.036,10.743L7,7.707L7,12ZM7,6L6,6L6,7L7,7L7,6Z" style="fill:rgb(194,125,26);"/>
+</svg>

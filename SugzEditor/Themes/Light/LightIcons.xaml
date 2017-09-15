@@ -1,28 +1,7 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
-    <!--NewFile_20x-->
-    <Viewbox x:Key="NewFile_20x" Width="20" Height="20">
-        <Rectangle Width="20" Height="20">
-            <Rectangle.Fill>
-                <DrawingBrush>
-                    <DrawingBrush.Drawing>
-                        <DrawingGroup>
-                            <DrawingGroup.Children>
-                                <GeometryDrawing Brush="#FFCCCCCC" Geometry="M4,9l-1,0l0,-0.879l-0.621,0.621l-2.122,-2.121l0.621,-0.621l-0.878,0l0,-3l0.878,0l-0.621,-0.621l2.122,-2.122l0.621,0.621l0,-0.878l3,0l0,0.878l0.621,-0.621l1.742,1.743l4.051,0l3.586,3.586l0,8.414c-0.028,0.825 -0.593,2 -2.035,2l-8,0c-0.953,0 -1.965,-0.701 -1.965,-2l0,-5Z" />
-                                <GeometryDrawing Brush="#FF424242" Geometry="M15,6l0,8c0,0 -0.035,1 -1.035,1l-8,0c0,0 -0.965,0 -0.965,-1l0,-5l1,0l0,5l8,0l0,-7l-3,0l0,-3l-2,0l0,-1l3,0l3,3Z" />
-                                <GeometryDrawing Brush="#FFF0EFF1" Geometry="M14,7l0,7l-8,0l0,-6l0,-2l2,0l0,-2l3,0l0,3l3,0Z" />
-                                <GeometryDrawing Brush="#FFC27D1A" Geometry="F1M5,5L4,5 4,4 5,4z M8,4L5.707,4 7.328,2.379 6.621,1.671 5,3.292 5,1 4,1 4,3.292 2.379,1.671 1.671,2.379 3.292,4 1,4 1,5 3.292,5 1.671,6.621 2.379,7.328 4,5.707 4,8 5,8 5,5.707 6.621,7.328 7.328,6.621 5.707,5 8,5z" />
-                            </DrawingGroup.Children>
-                        </DrawingGroup>
-                    </DrawingBrush.Drawing>
-                </DrawingBrush>
-            </Rectangle.Fill>
-        </Rectangle>
-    </Viewbox>
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--AddFile_20x-->
-    <Viewbox x:Key="AddFile_20x" Width="20" Height="20">
+    <Viewbox x:Key="AddFile_20x_old" Width="20" Height="20">
         <Rectangle Width="20" Height="20">
             <Rectangle.Fill>
                 <DrawingBrush>
@@ -42,7 +21,7 @@
     </Viewbox>
 
     <!--AddFolder_20x-->
-    <Viewbox x:Key="AddFolder_20x" Width="20" Height="20">
+    <Viewbox x:Key="AddFolder_20x_old" Width="20" Height="20">
         <Rectangle Width="20" Height="20">
             <Rectangle.Fill>
                 <DrawingBrush>
@@ -61,65 +40,6 @@
         </Rectangle>
     </Viewbox>
     
-    <!--OpenFile_20x-->
-    <Viewbox x:Key="OpenFile_20x" Width="20" Height="20">
-        <Rectangle Width="20" Height="20">
-            <Rectangle.Fill>
-                <DrawingBrush>
-                    <DrawingBrush.Drawing>
-                        <DrawingGroup>
-                            <DrawingGroup.Children>
-                                <GeometryDrawing Brush="#FFCCCCCC" Geometry="M12.414,2L8.403,2L6.416,0L1.597,0L3.584,2C3.584,2 3.528,2 3.5,2C1.094,1.999 0,4.083 0,5.5C0,7.321 1.542,9.01 3.5,9C3.792,8.998 4,9 4,9L4,14C4,15.299 5.012,16 5.965,16L13.965,16C15.407,16 15.972,14.825 16,14L16,5.586L12.414,2Z" />
-                                <GeometryDrawing Brush="#FF424242" Geometry="M15,6L15,14C15,14 14.965,15 13.965,15L5.965,15C5.965,15 5,15 5,14L5,7.417L6,7.417L6,14L14,14L14,7L11,7L11,4L9.435,4L9.435,3L12,3L15,6Z" />
-                                <GeometryDrawing Brush="#FFF0EFF1" Geometry="M14,7L14,14L6,14L6,7.403L9.417,4L11,4L11,7L14,7Z" />
-                                <GeometryDrawing Brush="#FF00529C" Geometry="F1M6,1L4,1 5.987,3 3.5,3C2.119,3 1,4.119 1,5.5 1,6.065 1.194,6.581 1.511,7 1.968,7.604 2.685,8 3.5,8L4,8 4,7 3.5,7C2.673,7 2,6.327 2,5.5 2,4.673 2.673,4 3.5,4L6.013,4 4,6 6,6 7,5 7.006,5 8.5,3.516z" />
-                            </DrawingGroup.Children>
-                        </DrawingGroup>
-                    </DrawingBrush.Drawing>
-                </DrawingBrush>
-            </Rectangle.Fill>
-        </Rectangle>
-    </Viewbox>
-
-    <!--OpenFolder_20x-->
-    <Viewbox x:Key="OpenFolder_20x" Width="20" Height="20">
-        <Rectangle Width="20" Height="20">
-            <Rectangle.Fill>
-                <DrawingBrush>
-                    <DrawingBrush.Drawing>
-                        <DrawingGroup>
-                            <DrawingGroup.Children>
-                                <GeometryDrawing Brush="#FFCCCCCC" Geometry="F1M14,3L9.397,3 6.416,0 1.597,0 3.584,2 3.5,2C1.57,2 0,3.57 0,5.5 0,6.258 0.247,6.985 0.712999999999999,7.604 0.798999999999999,7.716 0.904,7.804 1,7.904L1,9 0,9 0,10.196 2.323,16 14,16C14,16 14.86,15.979 15.43,15.435 15.773,15.103 16,14.617 16,14L16,5C16,3.697,14.995,3,14,3" />
-                                <GeometryDrawing Brush="#FFDCB679" Geometry="F1M3,10L3,8.942C2.651,8.891,2.313,8.805,2,8.654L2,10 1,10 3,15 14,15 11,10z" />
-                                <GeometryDrawing Brush="#FFDCB679" Geometry="F1M7.5791,5.8413L6.4141,7.0003 7.0001,7.0003z" />
-                                <GeometryDrawing Brush="#FFDCB679" Geometry="F1M14,4L9.432,4 8.426,5 14,5 14,14.984C14,14.984,15,15,15,14L15,5C15,4,14,4,14,4" />
-                                <GeometryDrawing Brush="#FF00529C" Geometry="F1M6,1L4,1 5.987,3 3.5,3C2.119,3 1,4.119 1,5.5 1,6.065 1.194,6.581 1.511,7 1.968,7.604 2.685,8 3.5,8L4,8 4,7 3.5,7C2.673,7 2,6.327 2,5.5 2,4.673 2.673,4 3.5,4L6.013,4 4,6 6,6 7,5 7.006,5 8.5,3.516z" />
-                                <GeometryDrawing Brush="#FFF0EFF1" Geometry="F1M8.4258,5L7.5788,5.841 6.9998,7 6.4138,7 4.9998,7 4.9998,9 3.4998,9C3.3288,9,3.1658,8.966,2.9998,8.942L2.9998,10 10.9998,10 13.9998,15 13.9998,5z" />
-                            </DrawingGroup.Children>
-                        </DrawingGroup>
-                    </DrawingBrush.Drawing>
-                </DrawingBrush>
-            </Rectangle.Fill>
-        </Rectangle>
-    </Viewbox>
-
-    <!--Treeview_20x-->
-    <Viewbox x:Key="Treeview_20x" Width="20" Height="20">
-        <Rectangle Width="20" Height="20">
-            <Rectangle.Fill>
-                <DrawingBrush>
-                    <DrawingBrush.Drawing>
-                        <DrawingGroup>
-                            <DrawingGroup.Children>
-                                <GeometryDrawing Brush="#FFCCCCCC" Geometry="M0,0L8,0L8,6L6,6L6,8L12,8L12,7L20,7L20,13L12,13L12,12L6,12L6,15L12,15L12,14L20,14L20,20L12,20L12,19L2,19L2,6L0,6L0,0Z" />
-                                <GeometryDrawing Brush="#FF424242" Geometry="M19,19L13,19L13,15L19,15L19,19ZM5,9L11,9L11,11L5,11L5,16L11,16L11,18L3,18L3,7L5,7L5,9ZM19,12L13,12L13,8L19,8L19,12ZM7,5L1,5L1,1L7,1L7,5Z" />
-                            </DrawingGroup.Children>
-                        </DrawingGroup>
-                    </DrawingBrush.Drawing>
-                </DrawingBrush>
-            </Rectangle.Fill>
-        </Rectangle>
-    </Viewbox>
 
 
 

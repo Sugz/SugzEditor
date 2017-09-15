@@ -7,26 +7,51 @@
              xmlns:sgzcontrols="clr-namespace:SugzTools.Controls;assembly=SugzTools"
              mc:Ignorable="d"
              d:DesignHeight="30"
-             d:DesignWidth="300">
+             d:DesignWidth="300" 
+             DataContext="{Binding Source={StaticResource Locator}}">
 
     <StackPanel Orientation="Horizontal"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left"
                 WindowChrome.IsHitTestVisibleInChrome="True"
-                Height="30"
-                DataContext="{Binding Source={StaticResource Locator}}">
-        <ToggleButton Content="{DynamicResource Treeview_20x}"
-                      IsChecked="{Binding Explorer.ShowExplorer}" 
-                      Style="{DynamicResource ToolbarCheckButtonStyle}" />
-        <sgzcontrols:SgzButton Content="{DynamicResource NewFile_20x}"
-                               Style="{DynamicResource ToolbarButtonStyle}"
-                               ToolTip="New File (Ctrl+N)" />
-        <sgzcontrols:SgzButton Content="{DynamicResource OpenFile_20x}"
-                               Style="{DynamicResource ToolbarButtonStyle}"
-                               ToolTip="Add File (Ctrl+Shift+N)" />
-        <sgzcontrols:SgzButton Content="{DynamicResource OpenFolder_20x}"
-                               Style="{DynamicResource ToolbarButtonStyle}"
-                               ToolTip="Add Folder (Ctrl+Shift+F)" />
+                Height="30">
+
+        <Button Content="{DynamicResource ToolbarNewFile_20x}" 
+                Style="{DynamicResource ToolbarButtonStyle}" 
+                ToolTip="New File (Ctrl+N)" />
+        <Button Content="{DynamicResource ToolbarOpenFile_20x}" 
+                Style="{DynamicResource ToolbarButtonStyle}" 
+                ToolTip="Add File (Ctrl+Shift+N)" />
+        <Button Content="{DynamicResource ToolbarOpenFolder_20x}" 
+                Style="{DynamicResource ToolbarButtonStyle}" 
+                ToolTip="Add Folder (Ctrl+Shift+F)" />
+        
+        <!--Separator-->
+        <Rectangle Width="2"
+                   Margin="5,2"
+                   Fill="{DynamicResource ToolbarBorderBrush}"/>
+        
+        <!--View-->
+        <ToggleButton Content="{DynamicResource ToolbarMenu_20x}"
+                      IsChecked="{Binding Main.ShowMenus}"
+                      Style="{DynamicResource ToolbarButtonStyle}"
+                      VerticalContentAlignment="Bottom"
+                      Padding="0,0,0,5" />
+        <ToggleButton Content="{DynamicResource ToolbarToolbar_20x}" 
+                      IsChecked="{Binding Main.ShowToolbar}" 
+                      Style="{DynamicResource ToolbarButtonStyle}" 
+                      Padding="0,2,0,0"/>
+        <ToggleButton Content="{DynamicResource ToolbarTreeview_18x}"
+                      IsChecked="{Binding Main.ShowExplorer}"
+                      Style="{DynamicResource ToolbarButtonStyle}"
+                      VerticalContentAlignment="Bottom"
+                      Padding="0,0,0,5" />
+        <ToggleButton Content="{DynamicResource ToolbarTabs_20x}" 
+                      IsChecked="{Binding Main.ShowTabs}" 
+                      Style="{DynamicResource ToolbarButtonStyle}" 
+                      VerticalContentAlignment="Bottom"
+                      Padding="0,0,0,5" />
+        
     </StackPanel>
 
 

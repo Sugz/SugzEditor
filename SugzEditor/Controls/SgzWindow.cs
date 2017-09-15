@@ -17,7 +17,7 @@ namespace SugzEditor.Controls
         public SgzWindow()
         {
             //DefaultStyleKey = typeof(SgzWindow);
-
+            CommandBindings.Add(new CommandBinding(SystemCommands.ShowSystemMenuCommand, OnShowSystemMenu));
             CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
             CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
             CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
@@ -33,6 +33,13 @@ namespace SugzEditor.Controls
         private void OnCanResizeWindow(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = ResizeMode == ResizeMode.CanResize || ResizeMode == ResizeMode.CanResizeWithGrip;
+        }
+
+        private void OnShowSystemMenu(object sender, ExecutedRoutedEventArgs e)
+        {
+            Point pointToWindow = Mouse.GetPosition(this);
+            Point pointToScreen = PointToScreen(pointToWindow);
+            SystemCommands.ShowSystemMenu(this, pointToScreen);
         }
 
         private void OnCloseWindow(object sender, ExecutedRoutedEventArgs e)

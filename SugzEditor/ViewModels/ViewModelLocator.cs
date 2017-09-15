@@ -13,6 +13,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using SugzEditor.Model;
+using SugzEditor.Settings;
 
 namespace SugzEditor.ViewModels
 {
@@ -40,6 +41,8 @@ namespace SugzEditor.ViewModels
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<ExplorerViewModel>();
+
+            SimpleIoc.Default.Register<SettingsConfigProvider>();
         }
 
         /// <summary>
@@ -52,11 +55,15 @@ namespace SugzEditor.ViewModels
         public ExplorerViewModel Explorer => ServiceLocator.Current.GetInstance<ExplorerViewModel>();
 
 
+        
+
+
         /// <summary>
         /// Cleans up all the resources.
         /// </summary>
         public static void Cleanup()
         {
+            
         }
     }
 }

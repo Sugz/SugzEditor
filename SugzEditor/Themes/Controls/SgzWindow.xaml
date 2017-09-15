@@ -10,7 +10,7 @@
                 <WindowChrome GlassFrameThickness="0,0,0,1"
                               ResizeBorderThickness="4"
                               NonClientFrameEdges="None"
-                              CaptionHeight="55"
+                              CaptionHeight="60"
                               CornerRadius="0"
                               UseAeroCaptionButtons="False" />
             </Setter.Value>
@@ -30,22 +30,30 @@
                                            HorizontalAlignment="Right"
                                            WindowChrome.IsHitTestVisibleInChrome="True"
                                            Height="25">
-                                    <sgzcontrols:SgzIcon Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
-                                                         Style="{DynamicResource SystemButtonStyle}"
-                                                         Icon="MdiWindowClose" />
-                                    <sgzcontrols:SgzIcon x:Name="maximize" 
-                                                         Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
-                                                         Style="{DynamicResource SystemButtonStyle}"
-                                                         Icon="MdiWindowMaximize" />
-                                    <sgzcontrols:SgzIcon x:Name="restore" 
-                                                         Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"
-                                                         Style="{DynamicResource SystemButtonStyle}"
-                                                         Icon="MdiWindowRestore" />
-                                    <sgzcontrols:SgzIcon Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
-                                                         Style="{DynamicResource SystemButtonStyle}"
-                                                         Icon="MdiWindowMinimize"
-                                                         Padding="8,15,8,8"
-                                                         VerticalContentAlignment="Bottom" />
+                                    <Button Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
+                                            Style="{DynamicResource SystemButtonStyle}" >
+                                        <Path Data="M15,11.556L19,8L20,8L20,9L16.063,12.5L20,16L20,17L19,17L15,13.444L11,17L10,17L10,16L13.938,12.5L10,9L10,8L11,8L15,11.556Z" 
+                                              Fill="{DynamicResource MainForeground}" />
+                                    </Button>
+                                    <Button x:Name="maximize" 
+                                            Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
+                                            Style="{DynamicResource SystemButtonStyle}" >
+                                        <Path Data="M20,8L20,17L10,17L10,8L20,8ZM19,10L11,10L11,16L19,16L19,10Z" 
+                                              Fill="{DynamicResource MainForeground}" />
+                                    </Button>
+                                    <Button x:Name="restore" 
+                                            Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"
+                                            Style="{DynamicResource SystemButtonStyle}" >
+                                        <Path Data="M17,12L11,12L11,16L17,16L17,12ZM18,17L10,17L10,11L12,11L12,8L20,8L20,15L19,15L18,15L18,17ZM19,14L19,10L13,10L13,11L18,11L18,14L19,14Z" 
+                                              Fill="{DynamicResource MainForeground}" />
+                                    </Button>
+                                    <Button Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
+                                            Style="{DynamicResource SystemButtonStyle}" >
+                                        <Rectangle Width="8" 
+                                                   Height="2" 
+                                                   Margin="11,15,11,8" 
+                                                   Fill="{DynamicResource MainForeground}" />
+                                    </Button>
                                 </DockPanel>
                                 
                             </Grid>

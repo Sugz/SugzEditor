@@ -25,6 +25,10 @@
     
     <!--Disable-->
     <SolidColorBrush x:Key="DisabledForeground" Color="#FF656565" /> <!--255 101 101 101-->
-
+    
+    <!--Icons-->
+    <SolidColorBrush x:Key="IconYellowBackground" Color="#FFDCB67A" /> <!--255 220 182 122-->
+    <SolidColorBrush x:Key="IconGrayBackground" Color="#FFC5C5C5" /> <!--255 197 197 197-->
+    <SolidColorBrush x:Key="IconBlueBackground" Color="#FF7AC1FF" /> <!--255 122 193 255-->
 
 </ResourceDictionary>

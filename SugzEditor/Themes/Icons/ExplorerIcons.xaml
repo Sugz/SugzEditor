@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--Treeview_18x-->
+    <Rectangle x:Key="ExplorerTreeview_12x" Width="12" Height="12" UseLayoutRounding="True" SnapsToDevicePixels="True">
+        <Rectangle.Fill>
+            <DrawingBrush>
+                <DrawingBrush.Drawing>
+                    <DrawingGroup>
+                        <DrawingGroup.Children>
+                            <GeometryDrawing Brush="{DynamicResource MainBackground}" Geometry="M4.5,3l4.5,0l0,6l-4.5,0l0,-6Zm-4.5,0l0,-3l4.5,0l0,3l-1.125,0l0,0.375l1.125,0l0,2.25l-1.125,0l0,0.75l1.125,0l0,2.25l-3.375,0l0,-5.625l-1.125,0Z" />
+                            <GeometryDrawing Brush="{DynamicResource IconGrayBackground}" Geometry="M8.25,6.75l0,1.5l-3,0l0,-1.5l3,0Zm-4.5,-4.5l-1.125,0l0,1.875l1.125,0l0,0.75l-1.125,0l0,2.25l1.125,0l0,0.75l-1.125,0l-0.75,0l0,-5.625l-1.125,0l0,-1.5l3,0l0,1.5Zm1.5,1.5l3,0l0,1.5l-3,0l0,-1.5Z" />
+                        </DrawingGroup.Children>
+                    </DrawingGroup>
+                </DrawingBrush.Drawing>
+            </DrawingBrush>
+        </Rectangle.Fill>
+    </Rectangle>
+    
+
+</ResourceDictionary>
