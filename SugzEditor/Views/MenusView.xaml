@@ -13,6 +13,7 @@
 
     <UserControl.Resources>
         <sgzconv:InvertBooleanConverter x:Key="InvertBool" />
+
     </UserControl.Resources>
 
     <DockPanel Height="30"
@@ -39,11 +40,18 @@
                           Icon="{DynamicResource MenuOpenFile_16x}" />
                 <MenuItem Header="Add Folder"
                           InputGestureText="Ctrl+Shift+F"
-                          Icon="{DynamicResource MenuOpenFolder_16x}" />
+                          Icon="{DynamicResource MenuOpenFolder_16x}" 
+                          Command="{Binding Explorer.AddFolderCommand, Mode=OneWay}" />
 
                 <Separator />
-                <MenuItem Header="Recent Files" />
-                <MenuItem Header="Recent Folders" />
+                <MenuItem Header="Recent Files" 
+                          ItemsSource="{Binding Explorer.RecentFiles}"
+                          ItemTemplate="{DynamicResource RecentItemsTemplate}"
+                          ItemContainerStyle="{DynamicResource RecentFileMenuItemStyle}"/>
+                <MenuItem Header="Recent Folders" 
+                          ItemsSource="{Binding Explorer.RecentFolders}"
+                          ItemTemplate="{DynamicResource RecentItemsTemplate}"
+                          ItemContainerStyle="{DynamicResource RecentFolderMenuItemStyle}"/>
                 <Separator />
                 <MenuItem Header="Exit"
                           Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}" 

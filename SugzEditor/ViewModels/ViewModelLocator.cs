@@ -12,7 +12,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
-using SugzEditor.Model;
+using SugzEditor.Models;
 using SugzEditor.Settings;
 
 namespace SugzEditor.ViewModels
@@ -29,20 +29,8 @@ namespace SugzEditor.ViewModels
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-            if (ViewModelBase.IsInDesignModeStatic)
-            {
-                SimpleIoc.Default.Register<IDataService, Design.DesignDataService>();
-            }
-            else
-            {
-                SimpleIoc.Default.Register<IDataService, DataService>();
-            }
-
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<ExplorerViewModel>();
-
-            SimpleIoc.Default.Register<SettingsConfigProvider>();
         }
 
         /// <summary>

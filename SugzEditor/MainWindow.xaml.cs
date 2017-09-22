@@ -18,7 +18,7 @@ namespace SugzEditor
             InitializeComponent();
             Closing += (s, e) =>
             {
-                ServiceLocator.Current.GetInstance<MainViewModel>().SaveConfig();
+                ServiceLocator.Current.GetInstance<MainViewModel>().SaveSettings();
                 ViewModelLocator.Cleanup();
             };
         }

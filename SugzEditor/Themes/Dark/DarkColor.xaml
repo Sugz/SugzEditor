@@ -16,11 +16,16 @@
     <!--Explorer-->
     <SolidColorBrush x:Key="ExplorerBackground" Color="#FF252526" /> <!--255 37 37 38-->
     <SolidColorBrush x:Key="ExplorerCategories" Color="#FF383838" /> <!--255 56 56 56-->
+    <SolidColorBrush x:Key="ExplorerBlue" Color="#FF094771" /> <!--255 9 71 113-->
+    <SolidColorBrush x:Key="ExplorerHover" Color="#FF2A2D2E" /> <!--255 42 45 46-->
+    <SolidColorBrush x:Key="ExplorerGray" Color="#FF3F3F46" /> <!--255 63 63 70-->
+    
 
     <!--Toolbar-->
     <SolidColorBrush x:Key="ToolbarBackground" Color="#FF2D2D30" /> <!--255 45 45 45-->
     <SolidColorBrush x:Key="ToolbarBorderBrush" Color="#FF3C3C3C" /> <!--255 60 60 60-->
     <SolidColorBrush x:Key="ToolbarMouseHover" Color="#FF3C3C3F" /> <!--255 60 60 60-->
+    <SolidColorBrush x:Key="ToolbarMouseDown" Color="#FF007ACC" /> <!--255 0 122 204-->
 
     
     <!--Disable-->
@@ -30,5 +35,7 @@
     <SolidColorBrush x:Key="IconYellowBackground" Color="#FFDCB67A" /> <!--255 220 182 122-->
     <SolidColorBrush x:Key="IconGrayBackground" Color="#FFC5C5C5" /> <!--255 197 197 197-->
     <SolidColorBrush x:Key="IconBlueBackground" Color="#FF7AC1FF" /> <!--255 122 193 255-->
+    <SolidColorBrush x:Key="IconGreenBackground" Color="#FF88D184" /> <!--255 136 209 132-->
+    <SolidColorBrush x:Key="IconPurpleBackground" Color="#FFD397E3" /> <!--255 211 151 227-->
 
 </ResourceDictionary>

@@ -17,10 +17,15 @@
                 <ResourceDictionary Source="/Themes/Dark/DarkIcons.xaml" />
 
                 <!--Controls-->
+                <ResourceDictionary Source="/SugzTools;component/Themes/FadeInOutScrollViewerStyle.xaml" />
+                
                 <ResourceDictionary Source="/Themes/Controls/Button.xaml" />
                 <ResourceDictionary Source="/Themes/Controls/ExplorerButton.xaml" />
                 <ResourceDictionary Source="/Themes/Controls/GridSplitter.xaml" />
                 <ResourceDictionary Source="/Themes/Controls/Menu.xaml" />
+                <ResourceDictionary Source="/Themes/Controls/SgzSplitButton.xaml" />
+                <ResourceDictionary Source="/Themes/Controls/Shared.xaml" />
+                <ResourceDictionary Source="/Themes/Controls/Treeview.xaml" />
                 
                 <!--Icons-->
                 <ResourceDictionary Source="/Themes/Icons/ExplorerIcons.xaml" />

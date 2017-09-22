@@ -9,18 +9,15 @@
                     xmlns:sgzconv="clr-namespace:SugzTools.Converters;assembly=SugzTools"
                     xmlns:ignore="http://www.galasoft.ch/ignore"
                     mc:Ignorable="d ignore"
-                    Width="1280"
-                    Height="720"
                     Title="SugzEditor"
-                    DataContext="{Binding Main, Source={StaticResource Locator}}" 
-                    Icon="Resources/SugzEditor.ico">
+                    DataContext="{Binding Source={StaticResource Locator}}" 
+                    Icon="Resources/SugzEditor.ico" >
 
     <Window.Resources>
         <sgzconv:InvertableBooleanToVisibilityConverter x:Key="BoolToVisibility" />
     </Window.Resources>
 
-    <DockPanel Background="{DynamicResource MainBackground}"
-               DataContext="{Binding Source={StaticResource Locator}}">
+    <DockPanel Background="{DynamicResource MainBackground}">
         <DockPanel DockPanel.Dock="Top"
                    Background="{DynamicResource ToolbarBackground}"
                    VerticalAlignment="Top">
@@ -34,12 +31,11 @@
                 <ColumnDefinition Width="{Binding Main.ExplorerGridWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <views:ExplorerView x:Name="explorerView"
-                                DockPanel.Dock="Left"/>
+            
+            <views:ExplorerView DockPanel.Dock="Left"/>
 
             <!-- GridSplitter -->
-            <GridSplitter x:Name="gridSplitter" 
-                          Visibility="{Binding Main.ShowExplorer, Converter={StaticResource BoolToVisibility}}"/>
+            <GridSplitter Visibility="{Binding Main.ShowExplorer, Converter={StaticResource BoolToVisibility}}"/>
 
         </Grid>
 

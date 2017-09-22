@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:SugzEditor.Themes">
 
     <!--NewFile_16x-->
-    <Rectangle x:Key="MenuNewFile_16x" Width="16" Height="16" UseLayoutRounding="True" SnapsToDevicePixels="True">
+    <Rectangle x:Key="MenuNewFile_16x" x:Shared="false" Width="16" Height="16" UseLayoutRounding="True" SnapsToDevicePixels="True">
         <Rectangle.Fill>
             <DrawingBrush>
                 <DrawingBrush.Drawing>
@@ -22,7 +22,7 @@
     </Rectangle>
 
     <!--OpenFile_16x-->
-    <Rectangle x:Key="MenuOpenFile_16x" Width="16" Height="16" UseLayoutRounding="True" SnapsToDevicePixels="True">
+    <Rectangle x:Key="MenuOpenFile_16x" x:Shared="false" Width="16" Height="16" UseLayoutRounding="True" SnapsToDevicePixels="True">
         <Rectangle.Fill>
             <DrawingBrush>
                 <DrawingBrush.Drawing>
@@ -41,7 +41,7 @@
     </Rectangle>
 
     <!--OpenFolder_16x-->
-    <Rectangle x:Key="MenuOpenFolder_16x" Width="16" Height="16" UseLayoutRounding="True" SnapsToDevicePixels="True">
+    <Rectangle x:Key="MenuOpenFolder_16x" x:Shared="false" Width="16" Height="16" UseLayoutRounding="True" SnapsToDevicePixels="True">
         <Rectangle.Fill>
             <DrawingBrush>
                 <DrawingBrush.Drawing>
@@ -61,7 +61,7 @@
     </Rectangle>
 
     <!--Close_16x-->
-    <Rectangle x:Key="MenuClose_16x" Width="14" Height="12" UseLayoutRounding="True" SnapsToDevicePixels="True">
+    <Rectangle x:Key="MenuClose_16x" x:Shared="false" Width="14" Height="12" UseLayoutRounding="True" SnapsToDevicePixels="True">
         <Rectangle.Fill>
             <DrawingBrush>
                 <DrawingBrush.Drawing>
@@ -78,7 +78,7 @@
     </Rectangle>
 
     <!--Treeview_16x-->
-    <Rectangle x:Key="MenuTreeview_16x" Width="16" Height="16" UseLayoutRounding="True" SnapsToDevicePixels="True">
+    <Rectangle x:Key="MenuTreeview_16x" x:Shared="false" Width="16" Height="16" UseLayoutRounding="True" SnapsToDevicePixels="True">
         <Rectangle.Fill>
             <DrawingBrush>
                 <DrawingBrush.Drawing>
@@ -94,7 +94,7 @@
     </Rectangle>
 
     <!--Toolbar_16x-->
-    <Rectangle x:Key="MenuToolbar_16x" Width="16" Height="11" UseLayoutRounding="True" SnapsToDevicePixels="True" >
+    <Rectangle x:Key="MenuToolbar_16x" x:Shared="false" Width="16" Height="11" UseLayoutRounding="True" SnapsToDevicePixels="True" >
         <Rectangle.Fill>
             <DrawingBrush>
                 <DrawingBrush.Drawing>
@@ -113,7 +113,7 @@
     </Rectangle>
 
     <!--Menu_16x-->
-    <Rectangle x:Key="MenuMenu_16x" Width="16" Height="16" UseLayoutRounding="True" SnapsToDevicePixels="True">
+    <Rectangle x:Key="MenuMenu_16x" x:Shared="false" Width="16" Height="16" UseLayoutRounding="True" SnapsToDevicePixels="True">
         <Rectangle.Fill>
             <DrawingBrush>
                 <DrawingBrush.Drawing>
@@ -132,7 +132,7 @@
     </Rectangle>
 
     <!--Tabs_16x-->
-    <Rectangle x:Key="MenuTabs_16x" Width="16" Height="16" UseLayoutRounding="True" SnapsToDevicePixels="True">
+    <Rectangle x:Key="MenuTabs_16x" x:Shared="false" Width="16" Height="16" UseLayoutRounding="True" SnapsToDevicePixels="True">
         <Rectangle.Fill>
             <DrawingBrush>
                 <DrawingBrush.Drawing>

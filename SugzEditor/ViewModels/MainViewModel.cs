@@ -1,9 +1,12 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
-using SugzEditor.Model;
+using GalaSoft.MvvmLight.Threading;
+using SugzEditor.Models;
 using SugzEditor.Settings;
 using SugzEditor.Themes;
+using System.Threading;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace SugzEditor.ViewModels
 {
@@ -19,21 +22,33 @@ namespace SugzEditor.ViewModels
         #region Fields
 
         SettingsConfigProvider _SettingsProvider = SimpleIoc.Default.GetInstance<SettingsConfigProvider>();
+        private bool _IsDarkTheme;
+        private bool _ShowMenus;
+        private bool _ShowToolbar;
+        private bool _ShowExplorer;
+        private double _SavedExplorerWidth;
+        private GridLength _ExplorerGridWidth;
+        private bool _ShowTabs;
 
-        private bool _ShowMenus;// = true;
-        private bool _ShowToolbar;// = true;
-        private bool _ShowExplorer;// = true;
-        private double _OldExplorerWidth = 300;
-        //private double _ExplorerWidth = 300;
-        private GridLength _ExplorerGridWidth = new GridLength(300);
-        private bool _ShowTabs;// = true;
-        private bool _IsDarkTheme;// = true;
 
         #endregion Fields
 
 
         #region Properties
 
+
+        /// <summary>
+        /// Get or set if the theme is dark or light
+        /// </summary>
+        public bool IsDarkTheme
+        {
+            get => _IsDarkTheme;
+            set
+            {
+                Set(ref _IsDarkTheme, value);
+                ThemeSelector.SetTheme(value);
+            }
+        }
 
         /// <summary>
         /// Get or set the menus visibility 
@@ -75,9 +90,8 @@ namespace SugzEditor.ViewModels
             set
             {
                 Set(ref _ExplorerGridWidth, value);
-                //_ExplorerWidth = value.Value;
                 if (value.Value != 0)
-                    _OldExplorerWidth = value.Value;
+                    _SavedExplorerWidth = value.Value;
             }
         }
 
@@ -90,37 +104,26 @@ namespace SugzEditor.ViewModels
             set => Set(ref _ShowTabs, value);
         }
 
-        /// <summary>
-        /// Get or set if the theme is dark or light
-        /// </summary>
-        public bool IsDarkTheme
-        {
-            get => _IsDarkTheme;
-            set
-            {
-                if (value != _IsDarkTheme)
-                {
-                    Set(ref _IsDarkTheme, value);
-                    ThemeSelector.SetTheme(value);
-                    //SaveConfig();
-                }
-            }
-        }
-
         #endregion Properties
 
 
-        #region RelayCommands
+        #region Commands
 
 
 
-        #endregion RelayCommands
+        #endregion Commands
+
+
+        #region Constructors
 
 
         public MainViewModel()
         {
-            LoadConfig();
-        }
+            LoadSettings();
+        } 
+
+
+        #endregion Constructors
 
 
         #region Methods
@@ -128,38 +131,42 @@ namespace SugzEditor.ViewModels
         /// <summary>
         /// Load user settings
         /// </summary>
-        void LoadConfig()
+        private void LoadSettings()
         {
             _SettingsProvider.Load();
 
             IsDarkTheme = _SettingsProvider.IsDarktheme;
             ShowMenus = _SettingsProvider.ShowMenus;
             ShowToolbar = _SettingsProvider.ShowToolbar;
+            ExplorerGridWidth = new GridLength(_SettingsProvider.ExplorerGridWidth);
             ShowExplorer = _SettingsProvider.ShowExplorer;
             ShowTabs = _SettingsProvider.ShowTabs;
         }
 
-        public void SaveConfig()
+        /// <summary>
+        /// Save current properties to user settings
+        /// </summary>
+        public void SaveSettings()
         {
             _SettingsProvider.IsDarktheme = IsDarkTheme;
             _SettingsProvider.ShowMenus = ShowMenus;
             _SettingsProvider.ShowToolbar = ShowToolbar;
             _SettingsProvider.ShowExplorer = ShowExplorer;
+            _SettingsProvider.ExplorerGridWidth = _SavedExplorerWidth;
             _SettingsProvider.ShowTabs = ShowTabs;
 
             _SettingsProvider.Save();
         }
 
+        /// <summary>
+        /// Set the ExplorerGridWidth to show or hide the explorer
+        /// </summary>
         private void ShowHideExplorer()
         {
             if (ShowExplorer)
-                ExplorerGridWidth = new GridLength(_OldExplorerWidth);
+                ExplorerGridWidth = new GridLength(_SavedExplorerWidth);
             else
                 ExplorerGridWidth = new GridLength(0);
-            //if (_ExplorerWidth == 0)
-            //    ExplorerGridWidth = new GridLength(_OldExplorerWidth);
-            //else
-            //    ExplorerGridWidth = new GridLength(0);
         }
 
         #endregion Methods
