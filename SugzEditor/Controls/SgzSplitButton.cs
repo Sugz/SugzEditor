@@ -8,14 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Shapes;
 
 namespace SugzEditor.Controls
 {
-    [TemplatePart(Name = "PART_Button", Type = typeof(Border))]
-    [TemplatePart(Name = "PART_Toggle", Type = typeof(Border))]
-    public class SgzSplitButton : Button
+    [TemplatePart(Name = "PART_Button", Type = typeof(Border)),
+    TemplatePart(Name = "PART_Toggle", Type = typeof(Border)),
+    TemplatePart(Name = "PART_Popup", Type = typeof(Popup))]
+    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(MenuItem))]
+    public class SgzSplitButton : ItemsControl
     {
 
         #region Fields
@@ -23,66 +26,56 @@ namespace SugzEditor.Controls
         // Template Parts
         private Border PART_Button;
         private Border PART_Toggle;
+        private Popup PART_Popup;
 
         #endregion Fields
 
 
         #region Properties
 
-
-        //[Browsable(false)]
-        //public ItemCollection Items
-        //{
-        //    get => (ItemCollection)GetValue(ItemsProperty);
-        //    //set => SetValue(ItemsProperty, value);
-        //}
-
-        //// DependencyProperty as the backing store for Items
-        //public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(
-        //    "Items",
-        //    typeof(ItemCollection),
-        //    typeof(ownerclass),
-        //    new PropertyMetadata(0)
-        //);
-
-
-
-
-        public IEnumerable ItemsSource
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description(""), Category("Common")]
+        public object Content
         {
-            get => (IEnumerable)GetValue(ItemsSourceProperty);
-            set => SetValue(ItemsSourceProperty, value);
+            get => (GetValue(ContentProperty));
+            set => SetValue(ContentProperty, value);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description(""), Category("Appearance")]
+        public bool IsExpanded
+        {
+            get => (bool)GetValue(IsExpandedProperty);
+            set => SetValue(IsExpandedProperty, value);
         }
 
         [Browsable(false)]
-        public bool ItemsSourceIsEmpty
+        public bool IsPressed
         {
-            get => (bool)GetValue(ItemsSourceIsEmptyProperty);
-            set => SetValue(ItemsSourceIsEmptyProperty, value);
+            get => (bool)GetValue(IsPressedProperty);
+            set => SetValue(IsPressedProperty, value);
         }
 
-        // DependencyProperty as the backing store for ItemsSourceIsEmpty
-        public static readonly DependencyProperty ItemsSourceIsEmptyProperty = DependencyProperty.Register(
-            "ItemsSourceIsEmpty",
-            typeof(bool),
-            typeof(SgzSplitButton),
-            new PropertyMetadata(true)
-        );
-
-
-
-
-        public DataTemplate ItemTemplate
+        /// <summary>
+        /// Get or sets the Command property. 
+        /// </summary>
+        public ICommand Command
         {
-            get => (DataTemplate)GetValue(ItemTemplateProperty);
-            set => SetValue(ItemTemplateProperty, value);
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
         }
 
-
-        public Style ItemContainerStyle
+        /// <summary>
+        /// Reflects the parameter to pass to the CommandProperty upon execution. 
+        /// </summary>
+        public Object CommandParameter
         {
-            get => (Style)GetValue(ItemContainerStyleProperty);
-            set => SetValue(ItemContainerStyleProperty, value);
+            get { return (Object)GetValue(CommandParameterProperty); }
+            set { SetValue(CommandParameterProperty, value); }
         }
 
 
@@ -105,38 +98,40 @@ namespace SugzEditor.Controls
 
         #region Dependency Properties
 
-        // DependencyProperty as the backing store for ItemsSource
-        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
-            "ItemsSource",
-            typeof(IEnumerable),
+
+        // DependencyProperty as the backing store for Content
+        public static readonly DependencyProperty ContentProperty = DependencyProperty.Register(
+            "Content",
+            typeof(object),
             typeof(SgzSplitButton),
-            new PropertyMetadata(default(IEnumerable), ItemsSourceChanged)
+            new PropertyMetadata(null)
         );
 
-        
-        private static void ItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            SgzSplitButton control = d as SgzSplitButton;
-            control.ItemsSourceIsEmpty = ((ICollection)control.ItemsSource).Count == 0;
-            //if (control.ItemsSource is ObservableCollection<object> itemsSource)
-            //    control.ItemsSourceIsEmpty = itemsSource.Count == 0;
-
-        }
-
-        // DependencyProperty as the backing store for ItemTemplate
-        public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register(
-            "ItemTemplate",
-            typeof(DataTemplate),
+        // DependencyProperty as the backing store for IsExpanded
+        public static readonly DependencyProperty IsExpandedProperty = DependencyProperty.Register(
+            "IsExpanded",
+            typeof(bool),
             typeof(SgzSplitButton),
-            new PropertyMetadata(default(DataTemplate))
+            new PropertyMetadata(false)
         );
 
-        // DependencyProperty as the backing store for ItemContainerStyle
-        public static readonly DependencyProperty ItemContainerStyleProperty = DependencyProperty.Register(
-            "ItemContainerStyle",
-            typeof(Style),
+        // DependencyProperty as the backing store for IsPressed
+        public static readonly DependencyProperty IsPressedProperty = DependencyProperty.Register(
+            "IsPressed",
+            typeof(bool),
             typeof(SgzSplitButton),
-            new PropertyMetadata(default(Style))
+            new PropertyMetadata(false)
+        );
+
+        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(
+            "Command",
+            typeof(ICommand),
+            typeof(SgzSplitButton)
+        );
+        public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(
+            "CommandParameter",
+            typeof(Object),
+            typeof(SgzSplitButton)
         );
 
         // DependencyProperty as the backing store for IsButtonMouseOver
@@ -176,6 +171,11 @@ namespace SugzEditor.Controls
 
         #region Methods
 
+        /// <summary>
+        /// Force the container to only accept MenuItem
+        /// </summary>
+        protected override DependencyObject GetContainerForItemOverride() => new MenuItem();
+        protected override bool IsItemItsOwnContainerOverride(object item) => item is MenuItem;
 
         public override void OnApplyTemplate()
         {
@@ -183,8 +183,9 @@ namespace SugzEditor.Controls
             if (GetTemplateChild("PART_Button") is Border btn)
             {
                 PART_Button = btn;
-                PART_Button.MouseEnter += delegate { IsButtonMouseOver = true; };
+                PART_Button.MouseEnter += delegate { if (!IsPressed) IsButtonMouseOver = true; };
                 PART_Button.MouseLeave += delegate { IsButtonMouseOver = false; };
+                PART_Button.MouseUp += PART_Button_MouseUp;
                 PART_Button.PreviewMouseRightButtonUp += (s, e) =>
                 {
                     if (PART_Toggle != null)
@@ -200,32 +201,49 @@ namespace SugzEditor.Controls
             if (GetTemplateChild("PART_Toggle") is Border toggle)
             {
                 PART_Toggle = toggle;
-                PART_Toggle.MouseDown += (s, e) =>
-                {
-                    if (ItemsSource != null)
-                        ContextMenu.IsOpen = true;
-                    e.Handled = true;
-                };
+                PART_Toggle.MouseDown += PART_Toggle_MouseDown; ;
+                PART_Toggle.MouseUp += delegate { IsPressed = false; };
             }
-        
+            if (GetTemplateChild("PART_Popup") is Popup popup)
+            {
+                PART_Popup = popup;
+                PART_Popup.Opened += PART_Popup_Opened;
+                PART_Popup.Closed += PART_Popup_Closed;
+                PART_Popup.PreviewMouseUp += delegate { IsExpanded = false; };
+            }
+        }
 
-            //ContextMenu = new ContextMenu
-            //{
-            //    ItemsSource = ItemsSource,
-            //    ItemTemplate = ItemTemplate,
-            //    ItemContainerStyle = ItemContainerStyle,
-            //    PlacementTarget = this,
-            //    Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom
-            //};
-            ContextMenu.ItemsSource = ItemsSource;
-            ContextMenu.ItemTemplate = ItemTemplate;
-            ContextMenu.ItemContainerStyle = ItemContainerStyle;
-            ContextMenu.PlacementTarget = this;
-            ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
-            ContextMenu.Opened += delegate { ContextMenuIsOpen = true; };
-            ContextMenu.Closed += delegate { ContextMenuIsOpen = false; };
-            //ContextMenu.Items.CurrentChanged += (s, e) => ItemsSourceIsEmpty = ContextMenu.Items.Count == 0;
-            //ContextMenu.ItemsSource = ItemsSource;
+        private void PART_Button_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (Command != null && !IsPressed)
+                Command.Execute(CommandParameter);
+
+        }
+
+        private void PART_Toggle_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (HasItems)
+                IsExpanded = !IsExpanded;
+            IsPressed = true;
+        }
+
+        private void PART_Popup_Opened(object sender, EventArgs e)
+        {
+            Mouse.Capture(this, CaptureMode.SubTree);
+            Mouse.AddPreviewMouseDownOutsideCapturedElementHandler(this, OutsideCapturedElementHandler);
+        }
+
+        private void OutsideCapturedElementHandler(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        {
+            IsExpanded = false;
+            Mouse.RemovePreviewMouseDownOutsideCapturedElementHandler(this, OutsideCapturedElementHandler);
+        }
+
+        private void PART_Popup_Closed(object sender, EventArgs e)
+        {
+            ReleaseMouseCapture();
+            if (PART_Toggle != null)
+                PART_Toggle.Focus();
         }
 
 

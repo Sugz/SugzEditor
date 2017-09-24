@@ -19,9 +19,13 @@
                           Background="Transparent">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="30" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="1" />
+                            <ColumnDefinition Width="10" />
                         </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
                         <Border x:Name="PART_Button" 
                                 Background="{TemplateBinding Background}">
                             <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
@@ -30,19 +34,31 @@
                         </Border>
                         <Rectangle x:Name="PART_Rect"
                                    Grid.Column="1" 
-                                   Fill="{TemplateBinding Background}" 
-                                   Width="1"/>
+                                   Fill="{TemplateBinding Background}" />
                         <Border x:Name="PART_Toggle" 
                                 Background="{TemplateBinding Background}"
-                                Grid.Column="2"
-                                Width="10">
+                                Grid.Column="2">
                             <Path x:Name="arrow" 
                                   Fill="{TemplateBinding Foreground}" 
-                                  Data="M 0,0 L8,0 L4,4 Z" 
+                                  Data="M 0,0 L6,0 L3,3 Z" 
                                   VerticalAlignment="Center" 
                                   HorizontalAlignment="Center" 
                                   Margin="0,3,0,-1"/>
                         </Border>
+                        
+                        <Popup x:Name="PART_Popup" 
+                               Grid.Row="1"
+                               StaysOpen="True" 
+                               PopupAnimation="Fade"
+                               IsOpen="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                            <Border Background="{DynamicResource MainBackground}"
+                                    BorderBrush="{DynamicResource ToolbarBorderBrush}"
+                                    BorderThickness="1">
+                                <StackPanel IsItemsHost="True" 
+                                            Margin="2"/>
+                            </Border>
+                        </Popup>
+                        
                     </Grid>
 
                     <ControlTemplate.Triggers>
@@ -50,26 +66,39 @@
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsButtonMouseOver" Value="False" />
+                                <Condition Property="HasItems" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_Button" Property="Background" Value="{DynamicResource ToolbarMouseHover}" />
                             <Setter TargetName="PART_Toggle" Property="Background" Value="{DynamicResource ToolbarMouseHover}" />
                         </MultiTrigger>
+                        
                         <Trigger Property="IsButtonMouseOver" Value="True">
                             <Setter TargetName="PART_Button" Property="Background" Value="{DynamicResource ToolbarMouseHover}" />
                         </Trigger>
+                        
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsExpanded" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_Button" Property="Background" Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="PART_Toggle" Property="Background" Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </MultiTrigger>
+                        
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="PART_Button" Property="Background" Value="{DynamicResource ToolbarMouseDown}" />
-                            <Setter TargetName="PART_Toggle" Property="Background" Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="PART_Toggle" Property="Background" Value="{DynamicResource ToolbarMouseDown}" />
                         </Trigger>
-                        <Trigger Property="ContextMenuIsOpen" Value="True">
+                        <Trigger Property="IsExpanded" Value="True">
                             <Setter TargetName="PART_Grid" Property="Background" Value="{DynamicResource ToolbarMouseDown}" />
                         </Trigger>
 
-                        <!--<DataTrigger Binding="{Binding ContextMenu.Items.Count, Converter={StaticResource ItemsCountToBool}, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                        <!--<DataTrigger Binding="{Binding Items.Count, Converter={StaticResource ItemsCountToBool}, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
                             <Setter TargetName="PART_Toggle" Property="IsEnabled" Value="False" />
                             <Setter TargetName="arrow" Property="Fill" Value="{DynamicResource DisabledForeground}" />
                         </DataTrigger>-->
-                        <Trigger Property="ItemsSourceIsEmpty" Value="True">
+
+                        <Trigger Property="HasItems " Value="False">
                             <Setter TargetName="PART_Toggle" Property="IsEnabled" Value="False" />
                             <Setter TargetName="arrow" Property="Fill" Value="{DynamicResource DisabledForeground}" />
                         </Trigger>
