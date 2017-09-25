@@ -62,7 +62,7 @@
                     </Grid>
 
                     <ControlTemplate.Triggers>
-                        <MultiTrigger>
+                        <!--<MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsButtonMouseOver" Value="False" />
@@ -70,13 +70,13 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_Button" Property="Background" Value="{DynamicResource ToolbarMouseHover}" />
                             <Setter TargetName="PART_Toggle" Property="Background" Value="{DynamicResource ToolbarMouseHover}" />
-                        </MultiTrigger>
+                        </MultiTrigger>-->
                         
                         <Trigger Property="IsButtonMouseOver" Value="True">
                             <Setter TargetName="PART_Button" Property="Background" Value="{DynamicResource ToolbarMouseHover}" />
                         </Trigger>
                         
-                        <MultiTrigger>
+                        <!--<MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsExpanded" Value="True" />
@@ -88,24 +88,17 @@
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="PART_Button" Property="Background" Value="{DynamicResource ToolbarMouseDown}" />
                             <Setter TargetName="PART_Toggle" Property="Background" Value="{DynamicResource ToolbarMouseDown}" />
-                        </Trigger>
+                        </Trigger>-->
+                        
                         <Trigger Property="IsExpanded" Value="True">
                             <Setter TargetName="PART_Grid" Property="Background" Value="{DynamicResource ToolbarMouseDown}" />
                         </Trigger>
-
-                        <!--<DataTrigger Binding="{Binding Items.Count, Converter={StaticResource ItemsCountToBool}, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
-                            <Setter TargetName="PART_Toggle" Property="IsEnabled" Value="False" />
-                            <Setter TargetName="arrow" Property="Fill" Value="{DynamicResource DisabledForeground}" />
-                        </DataTrigger>-->
 
                         <Trigger Property="HasItems " Value="False">
                             <Setter TargetName="PART_Toggle" Property="IsEnabled" Value="False" />
                             <Setter TargetName="arrow" Property="Fill" Value="{DynamicResource DisabledForeground}" />
                         </Trigger>
-                        <!--<Trigger Property="ItemsSourceIsEmpty" Value="True">
-                            <Setter TargetName="PART_Rect" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="PART_Toggle" Property="Visibility" Value="Collapsed" />
-                        </Trigger>-->
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
