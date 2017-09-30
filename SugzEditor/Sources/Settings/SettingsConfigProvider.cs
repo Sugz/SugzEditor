@@ -28,6 +28,13 @@ namespace SugzEditor.Settings
         public void Load()
         {
             IsFirstRun = _Settings.IsFirstRun;
+            if (IsFirstRun)
+            {
+                _Settings.Upgrade();
+                _Settings.IsFirstRun = false;
+                _Settings.Save();
+            }
+
             WindowState = _Settings.WindowState;
             WindowLocation = _Settings.WindowLocation;
             WindowSize = _Settings.WindowSize;
@@ -43,8 +50,6 @@ namespace SugzEditor.Settings
 
         public void Save()
         {
-            _Settings.IsFirstRun = false;
-
             _Settings.WindowState = WindowState;
             _Settings.WindowLocation = WindowLocation;
             _Settings.WindowSize = WindowSize;

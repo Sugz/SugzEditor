@@ -14,8 +14,7 @@ using System.Windows.Shapes;
 
 namespace SugzEditor.Controls
 {
-    [TemplatePart(Name = "PART_Grid", Type = typeof(Grid)), 
-    TemplatePart(Name = "PART_Button", Type = typeof(Border)),
+    [TemplatePart(Name = "PART_Button", Type = typeof(Border)),
     TemplatePart(Name = "PART_Toggle", Type = typeof(Border)),
     TemplatePart(Name = "PART_Popup", Type = typeof(Popup))]
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(MenuItem))]
@@ -25,7 +24,6 @@ namespace SugzEditor.Controls
         #region Fields
 
         // Template Parts
-        private Grid PART_Grid;
         private Border PART_Button;
         private Border PART_Toggle;
         private Popup PART_Popup;
@@ -36,9 +34,9 @@ namespace SugzEditor.Controls
         #region Properties
 
         /// <summary>
-        /// 
+        /// Get or set the main button content
         /// </summary>
-        [Description(""), Category("Common")]
+        [Description("The main button content"), Category("Common")]
         public object Content
         {
             get => (GetValue(ContentProperty));
@@ -46,24 +44,18 @@ namespace SugzEditor.Controls
         }
 
         /// <summary>
-        /// 
+        /// Get or set the expanded state (the popup visiblility)
         /// </summary>
-        [Description(""), Category("Appearance")]
+        [Description("The expanded state (the popup visiblility)"), Category("Common")]
         public bool IsExpanded
         {
             get => (bool)GetValue(IsExpandedProperty);
             set => SetValue(IsExpandedProperty, value);
         }
 
-        /*
-        [Browsable(false)]
-        public bool IsPressed
-        {
-            get => (bool)GetValue(IsPressedProperty);
-            set => SetValue(IsPressedProperty, value);
-        }*/
-
-
+        /// <summary>
+        /// 
+        /// </summary>
         [Browsable(false)]
         public bool IsButtonMouseOver
         {
@@ -71,71 +63,40 @@ namespace SugzEditor.Controls
             set => SetValue(IsButtonMouseOverProperty, value);
         }
 
-
         /// <summary>
         /// 
         /// </summary>
-        [Description(""), Category("")]
-        // [Browsable(false)]
+        [Browsable(false)]
         public bool IsButtonPressed
         {
             get => (bool)GetValue(IsButtonPressedProperty);
             set => SetValue(IsButtonPressedProperty, value);
         }
 
-        // DependencyProperty as the backing store for IsButtonPressed
-        public static readonly DependencyProperty IsButtonPressedProperty = DependencyProperty.Register(
-            "IsButtonPressed",
-            typeof(bool),
-            typeof(SgzSplitButton),
-            new PropertyMetadata(false)
-        );
-
         /// <summary>
         /// 
         /// </summary>
-        [Description(""), Category("")]
-        // [Browsable(false)]
+        [Browsable(false)]
         public bool IsToggleMouseOver
         {
             get => (bool)GetValue(IsToggleMouseOverProperty);
             set => SetValue(IsToggleMouseOverProperty, value);
         }
 
-        // DependencyProperty as the backing store for IsToggleMouseOver
-        public static readonly DependencyProperty IsToggleMouseOverProperty = DependencyProperty.Register(
-            "IsToggleMouseOver",
-            typeof(bool),
-            typeof(SgzSplitButton),
-            new PropertyMetadata(false)
-        );
-
         /// <summary>
         /// 
         /// </summary>
-        [Description(""), Category("")]
-        // [Browsable(false)]
+        [Browsable(false)]
         public bool IsTogglePressed
         {
             get => (bool)GetValue(IsTogglePressedProperty);
             set => SetValue(IsTogglePressedProperty, value);
         }
 
-        // DependencyProperty as the backing store for IsTogglePressed
-        public static readonly DependencyProperty IsTogglePressedProperty = DependencyProperty.Register(
-            "IsTogglePressed",
-            typeof(bool),
-            typeof(SgzSplitButton),
-            new PropertyMetadata(false)
-        );
-
-
-
-
-
         /// <summary>
         /// Get or sets the Command property. 
         /// </summary>
+        [Description("The Command to execute on the main button. "), Category("Common")]
         public ICommand Command
         {
             get { return (ICommand)GetValue(CommandProperty); }
@@ -143,11 +104,12 @@ namespace SugzEditor.Controls
         }
 
         /// <summary>
-        /// Reflects the parameter to pass to the CommandProperty upon execution. 
+        /// Get or set the parameter to pass to the Command upon execution
         /// </summary>
-        public Object CommandParameter
+        [Description("The parameter to pass to the Command upon execution. "), Category("Common")]
+        public object CommandParameter
         {
-            get { return (Object)GetValue(CommandParameterProperty); }
+            get { return GetValue(CommandParameterProperty); }
             set { SetValue(CommandParameterProperty, value); }
         }
 
@@ -155,7 +117,6 @@ namespace SugzEditor.Controls
 
 
         #region Dependency Properties
-
 
         // DependencyProperty as the backing store for Content
         public static readonly DependencyProperty ContentProperty = DependencyProperty.Register(
@@ -173,16 +134,6 @@ namespace SugzEditor.Controls
             new PropertyMetadata(false)
         );
 
-        // DependencyProperty as the backing store for IsPressed
-        public static readonly DependencyProperty IsPressedProperty = DependencyProperty.Register(
-            "IsPressed",
-            typeof(bool),
-            typeof(SgzSplitButton),
-            new PropertyMetadata(false)
-        );
-
-        
-
         // DependencyProperty as the backing store for IsButtonMouseOver
         public static readonly DependencyProperty IsButtonMouseOverProperty = DependencyProperty.Register(
             "IsButtonMouseOver",
@@ -191,12 +142,38 @@ namespace SugzEditor.Controls
             new PropertyMetadata(false)
         );
 
+        // DependencyProperty as the backing store for IsButtonPressed
+        public static readonly DependencyProperty IsButtonPressedProperty = DependencyProperty.Register(
+            "IsButtonPressed",
+            typeof(bool),
+            typeof(SgzSplitButton),
+            new PropertyMetadata(false)
+        );
+
+        // DependencyProperty as the backing store for IsToggleMouseOver
+        public static readonly DependencyProperty IsToggleMouseOverProperty = DependencyProperty.Register(
+            "IsToggleMouseOver",
+            typeof(bool),
+            typeof(SgzSplitButton),
+            new PropertyMetadata(false)
+        );
+
+        // DependencyProperty as the backing store for IsTogglePressed
+        public static readonly DependencyProperty IsTogglePressedProperty = DependencyProperty.Register(
+            "IsTogglePressed",
+            typeof(bool),
+            typeof(SgzSplitButton),
+            new PropertyMetadata(false)
+        );
+
+        // DependencyProperty as the backing store for Command
         public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(
             "Command",
             typeof(ICommand),
             typeof(SgzSplitButton)
         );
 
+        // DependencyProperty as the backing store for CommandParameter
         public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(
             "CommandParameter",
             typeof(Object),
@@ -233,113 +210,102 @@ namespace SugzEditor.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            if (GetTemplateChild("PART_Grid") is Grid grid)
-            {
-                PART_Grid = grid;
-                PART_Grid.MouseEnter += PART_Grid_MouseEnter;
-                PART_Grid.MouseLeave += PART_Grid_MouseLeave;
-                PART_Grid.MouseDown += PART_Grid_MouseDown;
-                PART_Grid.MouseUp += PART_Grid_MouseUp;
-            }
-
             if (GetTemplateChild("PART_Button") is Border button)
             {
                 PART_Button = button;
-                
+                PART_Button.MouseEnter += PART_Button_MouseEnter;
+                PART_Button.MouseLeave += PART_Button_MouseLeave;
+                PART_Button.MouseDown += PART_Button_MouseDown;
+                PART_Button.MouseUp += PART_Button_MouseUp;
+            }
+            if (GetTemplateChild("PART_Toggle") is Border toggle)
+            {
+                PART_Toggle = toggle;
+                PART_Toggle.MouseEnter += PART_Toggle_MouseEnter;
+                PART_Toggle.MouseLeave += PART_Toggle_MouseLeave;
+                PART_Toggle.MouseDown += PART_Toggle_MouseDown;
+                PART_Toggle.MouseUp += PART_Toggle_MouseUp;
+            }
+            if (GetTemplateChild("PART_Popup") is Popup popup)
+            {
+                PART_Popup = popup;
+                PART_Popup.Opened += PART_Popup_Opened;
+                PART_Popup.Closed += PART_Popup_Closed;
+                PART_Popup.PreviewMouseUp += PART_Popup_PreviewMouseUp;
             }
         }
 
 
-        /*
-        if (GetTemplateChild("PART_Button") is Border btn)
-        {
-            PART_Button = btn;
-            PART_Button.MouseEnter += delegate { if (!IsPressed) IsButtonMouseOver = true; };
-            PART_Button.MouseLeave += delegate { IsButtonMouseOver = false; };
-            PART_Button.MouseUp += PART_Button_MouseUp;
-            PART_Button.PreviewMouseRightButtonUp += (s, e) =>
-            {
-                if (PART_Toggle != null)
-                {
-                    MouseButtonEventArgs mouseButtonEventArgs = new MouseButtonEventArgs(Mouse.PrimaryDevice, 0, MouseButton.Left);
-                    mouseButtonEventArgs.RoutedEvent = Mouse.MouseDownEvent;
-                    mouseButtonEventArgs.Source = PART_Toggle;
-                    PART_Toggle.RaiseEvent(mouseButtonEventArgs);
-                }
-                e.Handled = true;
-            };
-        }
-        if (GetTemplateChild("PART_Toggle") is Border toggle)
-        {
-            PART_Toggle = toggle;
-            PART_Toggle.MouseDown += PART_Toggle_MouseDown; ;
-            PART_Toggle.MouseUp += delegate { IsPressed = false; };
-        }
+        #region Toggle events
 
-        if (GetTemplateChild("PART_Popup") is Popup popup)
-        {
-            PART_Popup = popup;
-            PART_Popup.Opened += PART_Popup_Opened;
-            PART_Popup.Closed += PART_Popup_Closed;
-            PART_Popup.PreviewMouseUp += delegate { IsExpanded = false; };
-        }
-    }
-    */
-
-        private void PART_Grid_MouseEnter(object sender, MouseEventArgs e)
+        private void PART_Toggle_MouseEnter(object sender, MouseEventArgs e)
         {
             IsToggleMouseOver = true;
             IsButtonMouseOver = IsButtonPressed = false;
-            if (PART_Button != null)
+
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
-                PART_Button.MouseEnter -= PART_Button_MouseEnter;
-                PART_Button.MouseUp -= PART_Button_MouseUp;
+                IsTogglePressed = true;
+                if (HasItems)
+                    IsExpanded = !IsExpanded;
             }
-                
+
+            Mouse.AddPreviewMouseUpOutsideCapturedElementHandler(this, OutsideCapturedElementHandler);
         }
 
-        private void PART_Grid_MouseLeave(object sender, MouseEventArgs e)
+        private void PART_Toggle_MouseLeave(object sender, MouseEventArgs e)
         {
             IsToggleMouseOver = false;
-            if (PART_Button != null)
-            {
-                PART_Button.MouseEnter += PART_Button_MouseEnter;
-                PART_Button.MouseUp += PART_Button_MouseUp;
-            }
         }
 
-        private void PART_Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        private void PART_Toggle_MouseDown(object sender, MouseButtonEventArgs e)
         {
             IsTogglePressed = true;
             if (HasItems)
                 IsExpanded = !IsExpanded;
         }
 
-        private void PART_Grid_MouseUp(object sender, MouseButtonEventArgs e)
+        private void PART_Toggle_MouseUp(object sender, MouseButtonEventArgs e)
         {
             IsTogglePressed = false;
+
         }
 
+        #endregion Toggle events
+
+
+        #region Button events
 
         private void PART_Button_MouseEnter(object sender, MouseEventArgs e)
         {
             IsButtonMouseOver = true;
+            IsToggleMouseOver = IsTogglePressed = false;
+            
         }
 
+        private void PART_Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            IsButtonMouseOver = false;
+        }
+
+        private void PART_Button_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            IsButtonPressed = true;
+            if (IsExpanded)
+                IsExpanded = false;
+        }
 
         private void PART_Button_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            Command?.Execute(CommandParameter);
+            IsButtonPressed = false;
+            if (Command != null && !IsExpanded)
+                Command.Execute(CommandParameter);
         }
 
-        /*
-        private void PART_Toggle_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (HasItems)
-                IsExpanded = !IsExpanded;
-            IsPressed = true;
-        }*/
+        #endregion Button events
 
+
+        #region Popup events
 
         private void PART_Popup_Opened(object sender, EventArgs e)
         {
@@ -355,10 +321,19 @@ namespace SugzEditor.Controls
 
         private void PART_Popup_Closed(object sender, EventArgs e)
         {
+            IsButtonMouseOver = IsButtonPressed = IsToggleMouseOver = IsTogglePressed = false;
+
             ReleaseMouseCapture();
             if (PART_Toggle != null)
                 PART_Toggle.Focus();
         }
+
+        private void PART_Popup_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            IsExpanded = false;
+        }
+
+        #endregion Popup events
 
 
 

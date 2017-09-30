@@ -97,8 +97,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\RecentItems.cs" />
-    <Compile Include="Controls\SplitButton.cs" />
     <Compile Include="Controls\TreeViewHelper.cs" />
     <Compile Include="Controls\SgzSplitButton.cs" />
     <Compile Include="Controls\SgzWindow.cs" />

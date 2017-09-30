@@ -30,6 +30,9 @@
         <ToggleButton x:Name="filesBtn"
                       Content="CURRENT"
                       Style="{DynamicResource ExplorerCheckButtonStyle}" />
+        <TreeView ItemsSource="{Binding Files}" 
+                  Visibility="{Binding IsChecked, ElementName=filesBtn, Converter={StaticResource BoolToVisibility}}" 
+                  MouseUp="TreeView_MouseUp" />
         <ToggleButton x:Name="maxFoldersBtn"
                       Content="3DS MAX"
                       Click="MaxFoldersBtn_Click"
