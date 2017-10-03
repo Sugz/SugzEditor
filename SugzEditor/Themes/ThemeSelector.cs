@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace SugzEditor.Theme
+namespace SugzEditor.Themes
 {
     public class ThemeSelector
     {

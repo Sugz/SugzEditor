@@ -47,7 +47,6 @@ namespace SugzEditor.ViewModel
         RelayCommand _OpenFileCommand = null;
         public ICommand OpenFileCommand => _OpenFileCommand ?? (_OpenFileCommand = new RelayCommand(OpenFile));
 
-
         private void OpenFile()
         {
             if (_Browser.GetFile(fileTypes: SgzConstants.FileTypes) is string selectedFile)

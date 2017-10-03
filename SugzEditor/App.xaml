@@ -12,7 +12,14 @@
             <ResourceDictionary.MergedDictionaries>
 
                 <!--<Colors-->
-                <ResourceDictionary Source="/Theme/Colors/DarkColors.xaml" />
+                <ResourceDictionary Source="/Themes/Colors/DarkColors.xaml" />
+
+                <!--Controls-->
+                <ResourceDictionary Source="/SugzTools;component/Themes/FadeInOutScrollViewerStyle.xaml" />
+
+                <ResourceDictionary Source="/Themes/Controls/SgzTabControl.xaml" />
+                <ResourceDictionary Source="/Themes/Controls/SgzTabItem.xaml" />
+                
 
             </ResourceDictionary.MergedDictionaries>
             

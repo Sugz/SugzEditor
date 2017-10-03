@@ -130,9 +130,9 @@ namespace SugzEditor.ViewModel
 
         internal void Close(SgzFileViewModel fileToClose)
         {
-            if (fileToClose.IsDirty)
+            if (fileToClose.IsModified)
             {
-                var res = MessageBox.Show(string.Format("Save changes for file '{0}'?", fileToClose.FileName), "AvalonDock Test App", MessageBoxButton.YesNoCancel);
+                var res = MessageBox.Show($"Save changes for file '{fileToClose.Title}'?", "SugzEditor", MessageBoxButton.YesNoCancel);
                 if (res == MessageBoxResult.Cancel)
                     return;
                 if (res == MessageBoxResult.Yes)
@@ -154,7 +154,7 @@ namespace SugzEditor.ViewModel
             }
 
             File.WriteAllText(fileToSave.FilePath, fileToSave.Document.Text);
-            ActiveDocument.IsDirty = false;
+            ActiveDocument.IsModified = false;
         }
 
 

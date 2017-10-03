@@ -104,20 +104,38 @@
     </ApplicationDefinition>
     <Compile Include="Control\SgzTabControl.cs" />
     <Compile Include="Control\SgzTabItem.cs" />
+    <Compile Include="Source\FileTypes.cs" />
     <Compile Include="Source\SgzConstants.cs" />
-    <Compile Include="Theme\IconProvider.cs" />
-    <Compile Include="Theme\ThemeSelector.cs" />
+    <Compile Include="Themes\IconProvider.cs" />
+    <Compile Include="Themes\ThemeSelector.cs" />
+    <Compile Include="ViewModel\SgaDataItemViewModel.cs" />
     <Compile Include="ViewModel\SgzFileViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\SgzExplorerViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\PaneViewModel.cs" />
     <Compile Include="ViewModel\Workspace.cs" />
-    <Page Include="Theme\Colors\DarkColors.xaml">
+    <Page Include="Themes\Colors\DarkColors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\Colors\LightColors.xaml">
+    <Page Include="Themes\Colors\LightColors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Controls\SgzTabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Controls\SgzTabItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Controls\Shared.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Icons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +177,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <EmbeddedResource Include="Resources\Maxscript.xshd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SugzTools\CSharp\SugzTools\SugzTools.csproj">
@@ -201,10 +220,10 @@
     <Resource Include="Images\property-blue.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resource\" />
-    <Folder Include="Theme\Controls\" />
-    <Folder Include="Theme\Converters\" />
-    <Folder Include="Theme\Icons\" />
+    <Folder Include="Themes\Converters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SugzEditor.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
