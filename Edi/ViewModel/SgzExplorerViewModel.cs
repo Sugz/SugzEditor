@@ -17,10 +17,7 @@ namespace SugzEditor.ViewModel
         private Browser _Browser = new Browser();
 
 
-        ObservableCollection<SgzFileViewModel> _Files = new ObservableCollection<SgzFileViewModel>();
-        ReadOnlyObservableCollection<SgzFileViewModel> _ReadonyFiles = null;
-        public ReadOnlyObservableCollection<SgzFileViewModel> Files => _ReadonyFiles ?? 
-            (_ReadonyFiles = new ReadOnlyObservableCollection<SgzFileViewModel>(_Files));
+        public ObservableCollection<SgzFileViewModel> Files { get; private set; } = new ObservableCollection<SgzFileViewModel>();
 
 
 
@@ -45,7 +42,7 @@ namespace SugzEditor.ViewModel
         #endregion
 
 
-        #region OpenCommand
+        #region OpenFileCommand
 
         RelayCommand _OpenFileCommand = null;
         public ICommand OpenFileCommand => _OpenFileCommand ?? (_OpenFileCommand = new RelayCommand(OpenFile));
@@ -57,7 +54,7 @@ namespace SugzEditor.ViewModel
             {
                 SgzFileViewModel fileVm = new SgzFileViewModel(selectedFile);
                 if (!Files.Any(x => x.FilePath.Equals(selectedFile)))
-                    _Files.Add(fileVm);
+                    Files.Add(fileVm);
                 fileVm.IsActive = true;
                 ActiveDocument = fileVm;
             }
