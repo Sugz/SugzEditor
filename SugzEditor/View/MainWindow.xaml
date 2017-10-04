@@ -3,14 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:avalonDock="http://avalondock.codeplex.com"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        xmlns:sysWindows="clr-namespace:System.Windows;assembly=PresentationCore"
-        xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
-        xmlns:control="clr-namespace:SugzEditor.Control"
-        x:Name="mainWindow"
+        xmlns:sysWindows="clr-namespace:System.Windows;assembly=PresentationCore" 
+        xmlns:control="clr-namespace:SugzEditor.Control" 
+		xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit" 
+		x:Name="mainWindow"
         Title="MainWindow"
         Height="650"
         Width="825"
-        DataContext="{Binding Source={StaticResource Locator}}" Icon="/SugzEditor;component/Resources/SugzEditor.ico">
+        DataContext="{Binding Source={StaticResource Locator}}" 
+        Icon="/SugzEditor;component/Resources/SugzEditor.ico">
     
     <Window.Resources>
 
@@ -104,8 +105,8 @@
         <control:SgzTabControl Grid.Row="2"
                                ItemsSource="{Binding Explorer.Files}">
             <control:SgzTabControl.ContentTemplate>
-                <DataTemplate>
-                    <avalonEdit:TextEditor Document="{Binding Document, UpdateSourceTrigger=PropertyChanged}"
+				<DataTemplate>
+					<avalonedit:TextEditor Document="{Binding Document, UpdateSourceTrigger=PropertyChanged}"
                                            SyntaxHighlighting="{Binding HighlightDef}"
                                            IsModified="{Binding Path=IsModified, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                            IsReadOnly="{Binding IsReadOnly}" 

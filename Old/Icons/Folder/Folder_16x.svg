@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
-    <path id="FolderOutline" d="M16,4C16,2.895 15.105,2 14,2C11.348,2 7,2 7,2L6,4C6,4 4.392,4 3,4C2.47,4 1.961,4.211 1.586,4.586C1.211,4.961 1,5.47 1,6C1,7.743 1,10.257 1,12C1,12.53 1.211,13.039 1.586,13.414C1.961,13.789 2.47,14 3,14C5.871,14 11.129,14 14,14C15.105,14 16,13.105 16,12C16,9.78 16,6.22 16,4Z" style="fill:rgb(246,246,246);"/>
-    <path id="FolderBg" d="M14,3C14.552,3 15,3.448 15,4C15,5.916 15,10.084 15,12C15,12.552 14.552,13 14,13C11.578,13 5.422,13 3,13C2.448,13 2,12.552 2,12C2,10.463 2,7.537 2,6C2,5.448 2.448,5 3,5C4.326,5 6.5,5 6.5,5L7.5,3C7.5,3 11.958,3 14,3Z" style="fill:rgb(220,182,122);"/>
-    <path id="FolderFg" d="M14,5L7.5,5L8,4L14,4L14,5Z" style="fill:rgb(240,239,241);fill-rule:nonzero;"/>
-</svg>

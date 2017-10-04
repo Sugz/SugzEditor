@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
-    <path id="TabsOutline" d="M0,0L0,16L16,16L16,4.001L15,4.001L15,0L0,0Z" style="fill:rgb(246,246,246);fill-rule:nonzero;"/>
-    <path id="TabsBg" d="M1,15L15,15L15,5L14,5L14,2L8,2L8,1L1,1L1,15Z" style="fill:rgb(66,66,66);"/>
-    <path id="TabsFg" d="M7,6L14,6L14,14L2,14L2,2L7,2L7,6Z" style="fill:rgb(246,246,246);"/>
-    <path id="TabsLines" d="M3,11L9,11L9,12L3,12L3,11ZM3,8L11,8L11,9L3,9L3,8Z" style="fill:rgb(66,66,66);"/>
-    <rect id="TabsActive" x="2" y="2" width="5" height="4" style="fill:rgb(13,40,242);"/>
-</svg>
