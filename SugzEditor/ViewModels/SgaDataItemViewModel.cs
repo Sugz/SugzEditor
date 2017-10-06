@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SugzEditor.ViewModel
+namespace SugzEditor.ViewModels
 {
     public class SgaDataItemViewModel : ViewModelBase
     {

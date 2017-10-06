@@ -1,5 +1,4 @@
-﻿//using SugzEditor.Model;
-using SugzEditor.ViewModel;
+﻿using SugzEditor.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -12,7 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace SugzEditor.Control
+namespace SugzEditor.Controls
 {
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(SgzTabItem))]
     [TemplatePart(Name = "PART_ScrollViewer", Type = typeof(ScrollViewer))]

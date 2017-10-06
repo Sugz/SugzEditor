@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace SugzEditor.Control
+namespace SugzEditor.Controls
 {
     public class SgzTabItem : TabItem
     {

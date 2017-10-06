@@ -3,7 +3,7 @@
     <!--Treeview-->
     <Rectangle x:Key="Treeview_12x" x:Shared="false" Width="12" Height="12" UseLayoutRounding="True" SnapsToDevicePixels="True">
         <Rectangle.Fill>
-            <DrawingBrush Stretch="Uniform">
+            <DrawingBrush Stretch="None">
                 <DrawingBrush.Drawing>
                     <DrawingGroup>
                         <DrawingGroup.Children>
@@ -29,7 +29,7 @@
             </DrawingBrush>
         </Rectangle.Fill>
     </Rectangle>
-    <Rectangle x:Key="Treeview_20x" x:Shared="false" Width="20" Height="20" UseLayoutRounding="True" SnapsToDevicePixels="True">
+    <Rectangle x:Key="Treeview_20x" x:Shared="false" Width="18" Height="18" UseLayoutRounding="True" SnapsToDevicePixels="True">
         <Rectangle.Fill>
             <DrawingBrush Stretch="Uniform">
                 <DrawingBrush.Drawing>
@@ -400,6 +400,86 @@
             </DrawingBrush>
         </Rectangle.Fill>
     </Rectangle>
+	
+	<!--Run-->
+	<Rectangle x:Key="Run_20x" x:Shared="false" Width="20" Height="20" UseLayoutRounding="True" SnapsToDevicePixels="True">
+		<Rectangle.Fill>
+			<DrawingBrush Stretch="None">
+				<DrawingBrush.Drawing>
+					<DrawingGroup>
+						<DrawingGroup.Children>
+							<GeometryDrawing Brush="{DynamicResource ToolbarBackground}" Geometry="M18.5,10l-15,10l-1.5,0l0,-20l1.5,0l15,10Z" />
+							<GeometryDrawing Brush="{DynamicResource IconGreenBackground}" Geometry="M17,10l-14,9l0,-18l14,9Z" />
+						</DrawingGroup.Children>
+					</DrawingGroup>
+				</DrawingBrush.Drawing>
+			</DrawingBrush>
+		</Rectangle.Fill>
+	</Rectangle>
+	<Rectangle x:Key="RunDisable_20x" x:Shared="false" Width="20" Height="20" UseLayoutRounding="True" SnapsToDevicePixels="True">
+		<Rectangle.Fill>
+			<DrawingBrush Stretch="None">
+				<DrawingBrush.Drawing>
+					<DrawingGroup>
+						<DrawingGroup.Children>
+							<GeometryDrawing Brush="{DynamicResource ToolbarBackground}" Geometry="M18.5,10l-15,10l-1.5,0l0,-20l1.5,0l15,10Z" />
+							<GeometryDrawing Brush="{DynamicResource IconDisableBackground}" Geometry="M17,10l-14,9l0,-18l14,9Z" />
+						</DrawingGroup.Children>
+					</DrawingGroup>
+				</DrawingBrush.Drawing>
+			</DrawingBrush>
+		</Rectangle.Fill>
+	</Rectangle>
 
+	<!--RunSelected-->
+	<Rectangle x:Key="RunSelected_20x" x:Shared="false" Width="20" Height="20" UseLayoutRounding="True" SnapsToDevicePixels="True">
+		<Rectangle.Fill>
+			<DrawingBrush Stretch="Uniform">
+				<DrawingBrush.Drawing>
+					<DrawingGroup>
+						<DrawingGroup.Children>
+							<GeometryDrawing Brush="{DynamicResource ToolbarBackground}" Geometry="M5,20l0,-19l14.5,10l-13.05,9l-1.45,0Z" />
+							<GeometryDrawing Brush="{DynamicResource IconGreenBackground}" Geometry="M18,11l-12,8l0,-16l12,8Z" />
+							<GeometryDrawing Brush="{DynamicResource ToolbarBackground}" Geometry="M5,2.879L5,0L8,0L8,2.879L10.036,0.843L12.157,2.964L10.121,5L13,5L13,8L10.121,8L12.157,10.036L10.036,12.157L8,10.121L8,13L5,13L5,10.121L2.964,12.157L0.843,10.036L2.879,8L0,8L0,5L2.879,5L0.843,2.964L2.964,0.843L5,2.879Z" />
+							<GeometryDrawing Brush="{DynamicResource IconYellowBackground}" Geometry="M7,12L6,12L6,7.707L2.964,10.743L2.257,10.036L5.293,7L1,7L1,6L5.293,6L2.257,2.964L2.964,2.257L6,5.293L6,1L7,1L7,5.293L10.036,2.257L10.743,2.964L7.707,6L12,6L12,7L7.707,7L10.743,10.036L10.036,10.743L7,7.707L7,12ZM7,6L6,6L6,7L7,7L7,6Z" />
+						</DrawingGroup.Children>
+					</DrawingGroup>
+				</DrawingBrush.Drawing>
+			</DrawingBrush>
+		</Rectangle.Fill>
+	</Rectangle>
+	<!--RunSelected-->
+	<Rectangle x:Key="RunSelectedDisable_20x" x:Shared="false" Width="20" Height="20" UseLayoutRounding="True" SnapsToDevicePixels="True">
+		<Rectangle.Fill>
+			<DrawingBrush Stretch="Uniform">
+				<DrawingBrush.Drawing>
+					<DrawingGroup>
+						<DrawingGroup.Children>
+							<GeometryDrawing Brush="{DynamicResource ToolbarBackground}" Geometry="M5,20l0,-19l14.5,10l-13.05,9l-1.45,0Z" />
+							<GeometryDrawing Brush="{DynamicResource IconDisableBackground}" Geometry="M18,11l-12,8l0,-16l12,8Z" />
+							<GeometryDrawing Brush="{DynamicResource ToolbarBackground}" Geometry="M5,2.879L5,0L8,0L8,2.879L10.036,0.843L12.157,2.964L10.121,5L13,5L13,8L10.121,8L12.157,10.036L10.036,12.157L8,10.121L8,13L5,13L5,10.121L2.964,12.157L0.843,10.036L2.879,8L0,8L0,5L2.879,5L0.843,2.964L2.964,0.843L5,2.879Z" />
+							<GeometryDrawing Brush="{DynamicResource IconDisableBackground}" Geometry="M7,12L6,12L6,7.707L2.964,10.743L2.257,10.036L5.293,7L1,7L1,6L5.293,6L2.257,2.964L2.964,2.257L6,5.293L6,1L7,1L7,5.293L10.036,2.257L10.743,2.964L7.707,6L12,6L12,7L7.707,7L10.743,10.036L10.036,10.743L7,7.707L7,12ZM7,6L6,6L6,7L7,7L7,6Z" />
+						</DrawingGroup.Children>
+					</DrawingGroup>
+				</DrawingBrush.Drawing>
+			</DrawingBrush>
+		</Rectangle.Fill>
+	</Rectangle>
+
+	<!--Refresh-->
+	<Rectangle x:Key="Refresh_20x" x:Shared="false" Width="20" Height="20" UseLayoutRounding="True" SnapsToDevicePixels="True">
+		<Rectangle.Fill>
+			<DrawingBrush Stretch="None">
+				<DrawingBrush.Drawing>
+					<DrawingGroup>
+						<DrawingGroup.Children>
+							<GeometryDrawing Brush="{DynamicResource ToolbarBackground}" Geometry="M17,4.5L9,10.5L9,7.126C8.373,7.292 7.792,7.603 7.311,8.04C6.907,8.407 6.578,8.857 6.353,9.355C5.967,10.209 5.895,11.193 6.152,12.095C6.258,12.469 6.42,12.827 6.63,13.154C6.855,13.505 7.135,13.821 7.457,14.086C7.755,14.332 8.088,14.535 8.444,14.686C9.338,15.064 10.363,15.101 11.282,14.79C11.649,14.666 11.998,14.487 12.314,14.262C12.785,13.927 13.182,13.49 13.47,12.989C13.74,12.52 13.912,11.998 13.974,11.46C13.999,11.241 14.004,11.021 13.995,10.801L13.947,9.964L18.64,8.399C18.762,8.858 18.859,9.352 18.922,9.809C18.937,9.93 18.951,10.05 18.962,10.171C19.016,10.791 19.012,11.414 18.941,12.032C18.803,13.243 18.414,14.422 17.806,15.479C17.285,16.386 16.605,17.199 15.807,17.874C15.032,18.53 14.146,19.054 13.197,19.415C12.358,19.734 11.472,19.925 10.577,19.982C9.703,20.037 8.822,19.966 7.969,19.769C7.041,19.555 6.148,19.191 5.334,18.696C4.41,18.134 3.589,17.406 2.921,16.556C2.246,15.698 1.73,14.717 1.405,13.675C1.056,12.554 0.932,11.365 1.036,10.195C1.147,8.941 1.525,7.714 2.14,6.615C2.792,5.45 3.703,4.435 4.791,3.662C5.623,3.07 6.555,2.621 7.538,2.342C8.006,2.208 8.484,2.117 8.968,2.059L9,2.055L9,0L11,0L17,4.5Z" />
+							<GeometryDrawing Brush="{DynamicResource IconBlueBackground}" Geometry="M10,1L15,4.5L10,8L10,6C7.24,6 5,8.24 5,11C5,13.76 7.24,16 10,16C12.76,16 15,13.76 15,11C15,10.889 14.996,10.779 14.989,10.67L17.895,9.702C17.964,10.124 18,10.558 18,11C18,15.415 14.415,19 10,19C5.585,19 2,15.415 2,11C2,6.585 5.585,3 10,3L10,1Z" />
+						</DrawingGroup.Children>
+					</DrawingGroup>
+				</DrawingBrush.Drawing>
+			</DrawingBrush>
+		</Rectangle.Fill>
+	</Rectangle>
 
 </ResourceDictionary>

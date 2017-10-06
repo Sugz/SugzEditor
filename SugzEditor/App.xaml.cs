@@ -1,4 +1,4 @@
-﻿namespace Edi
+﻿namespace SugzEditor
 {
   using System;
   using System.Collections.Generic;

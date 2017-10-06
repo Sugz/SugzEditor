@@ -8,11 +8,11 @@ using Microsoft.Win32;
 using System.IO;
 using System.Windows;
 using ICSharpCode.AvalonEdit.Document;
-using SugzEditor.ViewModel;
+using SugzEditor.ViewModels;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
-namespace SugzEditor.ViewModel
+namespace SugzEditor.ViewModels
 {
     public class Workspace : ViewModelBase
     {

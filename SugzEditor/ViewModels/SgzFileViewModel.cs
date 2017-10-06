@@ -17,7 +17,7 @@ using SugzEditor.Src;
 using SugzEditor.Themes;
 using System.Windows.Shapes;
 
-namespace SugzEditor.ViewModel
+namespace SugzEditor.ViewModels
 {
     public class SgzFileViewModel : SgaDataItemViewModel
     {

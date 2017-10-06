@@ -37,5 +37,6 @@
     <SolidColorBrush x:Key="IconBlueBackground" Color="#FF7AC1FF" /> <!--255 122 193 255-->
     <SolidColorBrush x:Key="IconGreenBackground" Color="#FF88D184" /> <!--255 136 209 132-->
     <SolidColorBrush x:Key="IconPurpleBackground" Color="#FFD397E3" /> <!--255 211 151 227-->
+	<SolidColorBrush x:Key="IconDisableBackground" Color="#FF535355" /> <!--255 83 83 85-->
     
 </ResourceDictionary>

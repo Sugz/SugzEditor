@@ -376,6 +376,7 @@
     <Compile Include="Snippets\SnippetReplaceableTextElement.cs" />
     <Compile Include="Snippets\SnippetSelectionElement.cs" />
     <Compile Include="Snippets\SnippetTextElement.cs" />
+    <Compile Include="SugzEditor\SgzTextEditor.cs" />
     <Compile Include="TextEditor.cs" />
     <Compile Include="TextEditorAutomationPeer.cs" />
     <Compile Include="TextEditorComponent.cs">
