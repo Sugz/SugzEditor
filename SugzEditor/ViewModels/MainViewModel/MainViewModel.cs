@@ -7,10 +7,12 @@ using System.Diagnostics;
 using SugzEditor.Src;
 using System.Linq;
 using SugzTools.Extensions;
-using SugzEditor.Models;
+using SugzEditor.Messages;
 using SugzTools.Src;
 using System.Collections.Generic;
 using System.Windows.Threading;
+using GalaSoft.MvvmLight.Threading;
+using SugzEditor.Models;
 
 namespace SugzEditor.ViewModels
 {
@@ -29,30 +31,37 @@ namespace SugzEditor.ViewModels
     public partial class MainViewModel : ViewModelBase
     {
 
-		DispatcherTimer _Timer = new DispatcherTimer();
-		Process[] maxProcess;
+
+		#region Properties
 
 
-
-		private string _MaxInstanceButtonText;
+		#region 3ds Max process button text
+		private string _MaxProcessButtonText;
 		/// <summary>
-		/// 
+		/// Get or set the text display in the 3ds max process split button
 		/// </summary>
-		public string MaxInstanceButtonText
+		public string MaxProcessButtonText
 		{
-			get => _MaxInstanceButtonText;
+			get => _MaxProcessButtonText;
 			set
 			{
-				if (value != _MaxInstanceButtonText)
+				if (value != _MaxProcessButtonText)
 				{
-					Set(ref _MaxInstanceButtonText, value);
+					Set(ref _MaxProcessButtonText, value);
 				}
 			}
 		}
+		#endregion 3ds Max process button text
 
-		public ObservableCollection<SgzMaxInstanceViewModel> MaxInstances { get; private set; } = new ObservableCollection<SgzMaxInstanceViewModel>();
-		//public ObservableCollection<string> MaxInstalls { get; private set; } = new ObservableCollection<string>();
-		public Dictionary<string, string> MaxInstalls { get; private set; } = new Dictionary<string, string>();
+		public ObservableCollection<MaxProcessViewModel> MaxProcess { get; private set; } = new ObservableCollection<MaxProcessViewModel>();
+		//public Dictionary<string, string> MaxInstalls { get; private set; } = new Dictionary<string, string>(); 
+		public MaxInstall[] MaxInstalls { get; private set; }
+
+		#endregion Properties
+
+
+
+		#region Commands
 
 
 		#region ExecuteCodeCommand
@@ -61,37 +70,34 @@ namespace SugzEditor.ViewModels
 
 		private bool CanExecuteCode()
 		{
-			return (MaxInstances.Any(x => x.IsChecked) && ActiveDocument != null);
+			return (MaxProcess.Any(x => x.IsChecked) && ActiveDocument != null);
 		}
 
 		private void ExecuteCode()
 		{
-			foreach (SgzMaxInstanceViewModel maxSession in MaxInstances.Where(x => x.IsChecked))
+			foreach (MaxProcessViewModel maxSession in MaxProcess.Where(x => x.IsChecked))
 				Debug.WriteLine($"Executing code from {ActiveDocument.Title} to {maxSession.Title}");
 		}
 		#endregion ExecuteCodeCommand
 
 
-		#region GetMaxInstancesCommand
-		private RelayCommand _GetMaxInstancesCommand;
-		public ICommand GetMaxInstancesCommand => _GetMaxInstancesCommand ?? (_GetMaxInstancesCommand = new RelayCommand(GetMaxInstances));
+		#region GetMaxProcessCommand
+		private RelayCommand _GetMaxProcessCommand;
+		public ICommand GetMaxProcessCommand => _GetMaxProcessCommand ?? (_GetMaxProcessCommand = new RelayCommand(GetMaxProcess));
 
-		private void GetMaxInstances()
+		private void GetMaxProcess()
 		{
-			// TODO: only add if doesn't exist instad of clearing the list to keep the checked ones
-			//MaxInstances.Clear();
-			maxProcess = Process.GetProcessesByName("3dsmax");
-			foreach (Process process in maxProcess)
+			foreach (Process process in Process.GetProcessesByName("3dsmax"))
 			{
-				Debug.WriteLine($"\n*********\n{process.Handle}\n{process.MainWindowHandle}\nCount: {process.HandleCount}\n**********\n");
-				SgzMaxInstanceViewModel maxInstance = new SgzMaxInstanceViewModel(process.MainWindowHandle);
-				MaxInstances.Add(maxInstance);
-				process.EnableRaisingEvents = true;
-				process.Exited += (s, e) => Dispatcher.CurrentDispatcher.Invoke(delegate { MaxInstances.Remove(maxInstance); });
+				if (!MaxProcess.Any(x => x.Process.Id == process.Id))
+				{
+					MaxProcessViewModel maxProcessViewModel = new MaxProcessViewModel(process);
+					MaxProcess.Add(maxProcessViewModel);
+				}
 			}
-			SetMaxInstanceButtonText();
+			SetMaxProcessButtonText();
 		}
-		#endregion GetMaxInstancesCommand
+		#endregion GetMaxProcessCommand
 
 
 		#region LunchMaxCommand
@@ -100,30 +106,32 @@ namespace SugzEditor.ViewModels
 
 		private void LunchMax(string key)
 		{
-			Debug.WriteLine($"{key} - {MaxInstalls[key]}");
 			Process.Start(MaxInstalls[key]);
-
-			_Timer.Interval = TimeSpan.FromSeconds(5);
+			DispatcherTimer _Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(5) };
 			_Timer.Tick += (s, e) =>
 			{
+				// Monitor the process to know when connection is available
 				foreach (Process process in Process.GetProcessesByName("3dsmax"))
 				{
-					if (!maxProcess.Any(x => x.Id == process.Id))
+					if (!MaxProcess.Any(x => x.Process.Id == process.Id) &&
+						MaxProcessViewModel.GetMacroRecorder(process.MainWindowHandle) != null)
 					{
-						if (SgzMaxInstanceViewModel.GetMacroRecorder(process.MainWindowHandle) != null)
-						{
-							SgzMaxInstanceViewModel maxInstance = new SgzMaxInstanceViewModel(process.MainWindowHandle);
-							MaxInstances.Add(maxInstance);
-							maxInstance.IsChecked = true;
-							SetMaxInstanceButtonText();
-							_Timer.Stop();
-						}
+						MaxProcessViewModel maxProcessViewModel = new MaxProcessViewModel(process);
+						MaxProcess.Add(maxProcessViewModel);
+						maxProcessViewModel.IsChecked = true;
+						SetMaxProcessButtonText();
+						_Timer.Stop();
 					}
 				}
 			};
 			_Timer.Start();
-		} 
-		#endregion LunchMaxCommand
+		}
+
+		#endregion LunchMaxCommand 
+
+
+		#endregion Commands
+
 
 
 		/// <summary>
@@ -132,33 +140,56 @@ namespace SugzEditor.ViewModels
 		public MainViewModel()
         {
 			GetMaxInstalls();
-			GetMaxInstances();
-			MessengerInstance.Register<ActiveMaxInstancesMessage>(this, x =>
+			GetMaxProcess();
+
+			MessengerInstance.Register<ActiveMaxProcessMessage>(this, x => SetMaxProcessButtonText());
+			MessengerInstance.Register<ClosedMaxProcessMessage>(this, x =>
 			{
-				ExecuteCodeCommand.RaiseCanExecuteChanged();
-				SetMaxInstanceButtonText();
+				MaxProcess.Remove(x.MaxProcess);
+				SetMaxProcessButtonText();
 			});
 		}
 
+
+
+		#region Methods
+
+
+		/// <summary>
+		/// Get 3ds max installs
+		/// </summary>
 		private void GetMaxInstalls()
 		{
-			foreach (string path in MaxFolders.Get().Values)
-				MaxInstalls.Add(
-					path.Split('\\').Last(),
-					path + "\\3dsmax.exe"
-				);
+			string[] paths = MaxFolders.Get().Values.ToArray();
+			MaxInstalls = new MaxInstall[paths.Length];
+			for (int i = 0; i < paths.Length; i++)
+				MaxInstalls[i] = new MaxInstall(paths[i]);
+
+			//foreach (string path in MaxFolders.Get().Values)
+			//	MaxInstalls.Add(
+			//		path.Split('\\').Last(),
+			//		path + "\\3dsmax.exe"
+			//	);
 		}
 
-		private void SetMaxInstanceButtonText()
+
+		/// <summary>
+		/// Set the text display in the 3ds max process button
+		/// </summary>
+		private void SetMaxProcessButtonText()
 		{
-			if (MaxInstances.Count == 0)
-				MaxInstanceButtonText = "No 3ds Max instance";
-			else if (MaxInstances.Where(s => s.IsChecked).Count() > 1)
-				MaxInstanceButtonText = "Mutiple instances";
-			else if (MaxInstances.FirstOrDefault(s => s.IsChecked) is SgzMaxInstanceViewModel instance)
-				MaxInstanceButtonText = instance.Title.Replace("Autodesk ", "");
+			ExecuteCodeCommand.RaiseCanExecuteChanged();
+			if (MaxProcess.Count == 0)
+				MaxProcessButtonText = "No 3ds Max process";
+			else if (MaxProcess.Where(s => s.IsChecked).Count() > 1)
+				MaxProcessButtonText = "Mutiple process";
+			else if (MaxProcess.FirstOrDefault(s => s.IsChecked) is MaxProcessViewModel instance)
+				MaxProcessButtonText = instance.Title.Replace("Autodesk ", "");
 			else
-				MaxInstanceButtonText = "Not connected";
-		}
+				MaxProcessButtonText = "Not connected";
+		} 
+
+
+		#endregion Methods
 	}
 }

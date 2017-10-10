@@ -19,17 +19,17 @@ using System.Windows.Shapes;
 
 namespace SugzEditor.ViewModels
 {
-    public class SgzFileViewModel : SgaDataItemViewModel
+    public class FileViewModel : DataItemViewModel
     {
 
         #region Constructors
-        public SgzFileViewModel(string filePath)
+        public FileViewModel(string filePath)
         {
             FilePath = filePath;
             Title = System.IO.Path.GetFileName(filePath);
         }
 
-        public SgzFileViewModel()
+        public FileViewModel()
         {
             Title = "Untitled";
             IsModified = true;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SugzEditor.ViewModels
 {
-    public class SgaDataItemViewModel : ViewModelBase
+    public class DataItemViewModel : ViewModelBase
     {
         public virtual string Title { get; set; }
 

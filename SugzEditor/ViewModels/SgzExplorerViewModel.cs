@@ -17,14 +17,14 @@ namespace SugzEditor.ViewModels
         private Browser _Browser = new Browser();
 
 
-        public ObservableCollection<SgzFileViewModel> Files { get; private set; } = new ObservableCollection<SgzFileViewModel>();
+        public ObservableCollection<FileViewModel> Files { get; private set; } = new ObservableCollection<FileViewModel>();
 
 
 
         #region ActiveDocument
 
-        private SgzFileViewModel _ActiveDocument;
-        public SgzFileViewModel ActiveDocument
+        private FileViewModel _ActiveDocument;
+        public FileViewModel ActiveDocument
         {
             get => _ActiveDocument;
             set
@@ -51,7 +51,7 @@ namespace SugzEditor.ViewModels
         {
             if (_Browser.GetFile(fileTypes: SgzConstants.FileTypes) is string selectedFile)
             {
-                SgzFileViewModel fileVm = new SgzFileViewModel(selectedFile);
+                FileViewModel fileVm = new FileViewModel(selectedFile);
                 if (!Files.Any(x => x.FilePath.Equals(selectedFile)))
                     Files.Add(fileVm);
                 fileVm.IsActive = true;

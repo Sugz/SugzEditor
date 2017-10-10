@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
-using SugzEditor.Models;
+using GalaSoft.MvvmLight.Threading;
+using SugzEditor.Messages;
 using SugzEditor.Src;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,11 @@ using System.Threading.Tasks;
 
 namespace SugzEditor.ViewModels
 {
-	public class SgzMaxInstanceViewModel : ViewModelBase
+	public class MaxProcessViewModel : ViewModelBase
 	{
 
-		public IntPtr Handle { get; private set; }
+		public Process Process { get; private set; }
+		//public IntPtr Handle { get; private set; }
 
 
 		private string _Title;
@@ -45,22 +47,27 @@ namespace SugzEditor.ViewModels
 				if (value != _IsChecked)
 				{
 					Set(ref _IsChecked, value);
-					MessengerInstance.Send(new ActiveMaxInstancesMessage(this));
+					MessengerInstance.Send(new ActiveMaxProcessMessage(this));
 					Send($"SugzEditor is {(value ? "connected" : "disconnected")}");
 				}
 			}
 		}
 
-		public SgzMaxInstanceViewModel(IntPtr handle)
+
+		public MaxProcessViewModel(Process process)
 		{
-			Handle = handle;
-			Title = NativeMethods.GetCaptionOfWindow(handle).Replace("Autodesk ", ""); ;
+			Process = process;
+			Title = NativeMethods.GetCaptionOfWindow(process.MainWindowHandle).Replace("Autodesk ", "");
+
+			// Notify the MainViewModel when the process is closed
+			process.EnableRaisingEvents = true;
+			process.Exited += (s, e) => DispatcherHelper.UIDispatcher.Invoke(() => MessengerInstance.Send(new ClosedMaxProcessMessage(this)));
 		}
 
 
 		public bool Send(string cmd)
 		{
-			if (GetMacroRecorder(Handle) is IntPtr macroRecorder)
+			if (GetMacroRecorder(Process.MainWindowHandle) is IntPtr macroRecorder)
 			{
 				NativeMethods.SendMessage(macroRecorder, 0x000C, 0, cmd);
 				NativeMethods.SendMessage(macroRecorder, 0x0102, 0x0D);

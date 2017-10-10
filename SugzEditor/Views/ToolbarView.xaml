@@ -8,7 +8,7 @@
 			 xmlns:vm="clr-namespace:SugzEditor.ViewModels"
 			 mc:Ignorable="d"
              d:DesignHeight="30"
-             d:DesignWidth="300" 
+             d:DesignWidth="600" 
              DataContext="{Binding Main, Source={StaticResource Locator}}">
 
 	<UserControl.Resources>
@@ -99,22 +99,22 @@
 				</Style>
 			</Button.Style>
 		</Button>
-		<controls:SgzSplitButton x:Name="maxInstancesBtn" 
-								 Command="{Binding GetMaxInstancesCommand}"
-								 ItemsSource="{Binding MaxInstances}" 
+		<controls:SgzSplitButton x:Name="maxInstancesBtn"
+								 Command="{Binding GetMaxProcessCommand}"
+								 ItemsSource="{Binding MaxProcess}" 
 								 ButtonWidth="Auto"
 								 AllowDisableExpand="False">
 			<controls:SgzSplitButton.Content>
 				<DockPanel>
-					<ContentPresenter Content="{DynamicResource Refresh_20x}" 
-									  Margin="5,0,0,0"/>
-					<TextBlock Text="{Binding MaxInstanceButtonText}"
-							   Margin="5,2,5,0" 
-							   Foreground="{Binding Foreground, ElementName=maxInstancesBtn}"/>
+					<ContentPresenter Content="{DynamicResource Refresh_20x}"
+									  Margin="5,0,0,0" />
+					<TextBlock Text="{Binding MaxProcessButtonText}"
+							   Margin="5,2,5,0"
+							   Foreground="{Binding Foreground, ElementName=maxInstancesBtn}" />
 				</DockPanel>
 			</controls:SgzSplitButton.Content>
 			<controls:SgzSplitButton.ContextMenu>
-				<ContextMenu ItemsSource="{Binding MaxInstalls.Keys}">
+				<ContextMenu ItemsSource="{Binding MaxInstalls}">
 					<ContextMenu.ItemContainerStyle>
 						<Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource MenuItemStyle}">
 							<Setter Property="Command" Value="{Binding Main.LunchMaxCommand, Source={StaticResource Locator}}" />

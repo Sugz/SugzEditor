@@ -29,14 +29,14 @@ namespace SugzEditor.ViewModels
         }
 
 
-        ObservableCollection<SgzFileViewModel> _files = new ObservableCollection<SgzFileViewModel>();
-        ReadOnlyObservableCollection<SgzFileViewModel> _readonyFiles = null;
-        public ReadOnlyObservableCollection<SgzFileViewModel> Files
+        ObservableCollection<FileViewModel> _files = new ObservableCollection<FileViewModel>();
+        ReadOnlyObservableCollection<FileViewModel> _readonyFiles = null;
+        public ReadOnlyObservableCollection<FileViewModel> Files
         {
             get
             {
                 if (_readonyFiles == null)
-                    _readonyFiles = new ReadOnlyObservableCollection<SgzFileViewModel>(_files);
+                    _readonyFiles = new ReadOnlyObservableCollection<FileViewModel>(_files);
 
                 return _readonyFiles;
             }
@@ -68,13 +68,13 @@ namespace SugzEditor.ViewModels
             }
         }
 
-        public SgzFileViewModel Open(string filepath)
+        public FileViewModel Open(string filepath)
         {
             var fileViewModel = _files.FirstOrDefault(fm => fm.FilePath == filepath);
             if (fileViewModel != null)
                 return fileViewModel;
 
-            fileViewModel = new SgzFileViewModel(filepath) { IsActive = true};
+            fileViewModel = new FileViewModel(filepath) { IsActive = true};
             _files.Add(fileViewModel);
             return fileViewModel;
         }
@@ -98,7 +98,7 @@ namespace SugzEditor.ViewModels
 
         private void OnNew()
         {
-            _files.Add(new SgzFileViewModel() { Document = new TextDocument() });
+            _files.Add(new FileViewModel() { Document = new TextDocument() });
             ActiveDocument = _files.Last();
         }
 
@@ -106,8 +106,8 @@ namespace SugzEditor.ViewModels
 
         #region ActiveDocument
 
-        private SgzFileViewModel _ActiveDocument = null;
-        public SgzFileViewModel ActiveDocument
+        private FileViewModel _ActiveDocument = null;
+        public FileViewModel ActiveDocument
         {
             get => _ActiveDocument;
             set
@@ -128,7 +128,7 @@ namespace SugzEditor.ViewModels
         #endregion
 
 
-        internal void Close(SgzFileViewModel fileToClose)
+        internal void Close(FileViewModel fileToClose)
         {
             if (fileToClose.IsModified)
             {
@@ -144,7 +144,7 @@ namespace SugzEditor.ViewModels
             _files.Remove(fileToClose);
         }
 
-        internal void Save(SgzFileViewModel fileToSave, bool saveAsFlag = false)
+        internal void Save(FileViewModel fileToSave, bool saveAsFlag = false)
         {
             if (fileToSave.FilePath == null || saveAsFlag)
             {
