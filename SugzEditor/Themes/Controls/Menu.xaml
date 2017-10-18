@@ -10,105 +10,113 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type MenuItem}">
                     <!--Border 1-->
-                    <Border x:Name="Border"
-                            Background="Transparent"
-                            BorderBrush="Transparent"
-                            BorderThickness="1"
-                            SnapsToDevicePixels="False">
-                        <Grid x:Name="Grid">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition x:Name="Col0" MinWidth="17" Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup" />
-                                <ColumnDefinition x:Name="Col1" Width="10" />
-                                <ColumnDefinition Width="Auto" SharedSizeGroup="MenuTextColumnGroup" />
-                                <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGTColumnGroup" />
-                                <ColumnDefinition x:Name="Col4" Width="14" />
-                            </Grid.ColumnDefinitions>
-                            <ContentPresenter x:Name="Icon"
-                                                VerticalAlignment="Center"
-                                                ContentSource="Icon" />
-                            <Border x:Name="GlyphPanel"
-                                    BorderBrush="{DynamicResource IconBlueBackground}"
-                                    BorderThickness="1"
-                                    Background="Transparent"
-                                    ClipToBounds="False"
-                                    HorizontalAlignment="Center"
-                                    Height="22"
-                                    Margin="-1,0,0,0"
-                                    Visibility="Hidden"
-                                    VerticalAlignment="Center"
-                                    Width="22">
-                                <Path x:Name="Glyph"
-                                        Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z"
-                                        Fill="{TemplateBinding Foreground}"
-                                        FlowDirection="LeftToRight"
-                                        Height="11"
-                                        Width="10"
-                                        Visibility="{Binding Visibility, ElementName=Icon, Converter={StaticResource InvertVisibility}}" />
+					<Border x:Name="Border"
+							Background="Transparent"
+							BorderBrush="Transparent"
+							BorderThickness="1"
+							SnapsToDevicePixels="False">
+						<Grid x:Name="Grid">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition x:Name="Col0"
+												  MinWidth="17"
+												  Width="Auto"
+												  SharedSizeGroup="MenuItemIconColumnGroup" />
+								<ColumnDefinition x:Name="Col1"
+												  Width="10" />
+								<ColumnDefinition Width="Auto"
+												  SharedSizeGroup="MenuTextColumnGroup" />
+								<ColumnDefinition Width="Auto"
+												  SharedSizeGroup="MenuItemIGTColumnGroup" />
+								<ColumnDefinition x:Name="Col4"
+												  Width="14" />
+							</Grid.ColumnDefinitions>
+							<ContentPresenter x:Name="Icon"
+											  VerticalAlignment="Center"
+											  ContentSource="Icon" />
+							<Border x:Name="GlyphPanel"
+									BorderBrush="{DynamicResource ToolbarMouseDown}"
+									BorderThickness="1"
+									Background="Transparent"
+									ClipToBounds="False"
+									HorizontalAlignment="Center"
+									Height="22"
+									Margin="-1,0,0,0"
+									Visibility="Hidden"
+									VerticalAlignment="Center"
+									Width="22">
+								<Path x:Name="Glyph"
+									  Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z"
+									  Fill="{TemplateBinding Foreground}"
+									  FlowDirection="LeftToRight"
+									  Height="11"
+									  Width="10"
+									  Visibility="{Binding Visibility, ElementName=Icon, Converter={StaticResource InvertVisibility}}" />
 
-                            </Border>
-                            <ContentPresenter x:Name="HeaderHost"
-                                                Grid.Column="2"
-                                                RecognizesAccessKey="True"
-                                                ContentSource="Header"
-                                                VerticalAlignment="Center"
-                                                Margin="0,1,10,1" />
-                            <ContentPresenter Grid.Column="3"
-                                                Margin="20,1,8,1"
-                                                x:Name="IGTHost"
-                                                ContentSource="InputGestureText"
-                                                VerticalAlignment="Center" />
-                            <Grid Grid.Column="4"
-                                    Margin="4,0,6,0"
-                                    x:Name="ArrowPanel"
-                                    VerticalAlignment="Center">
-                                <Path x:Name="ArrowPanelPath"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Center"
-                                        Fill="{TemplateBinding Foreground}"
-                                        Data="M0,0 L0,8 L4,4 z" />
-                            </Grid>
-                            <Popup IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                                    Placement="Right"
-                                    HorizontalOffset="-1"
-                                    x:Name="SubMenuPopup"
-                                    Focusable="false"
-                                    PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
-                                    AllowsTransparency="True">
-                                <Grid Margin="0,0,5,5">
-                                    <!--Border 2-->
-                                    <Border x:Name="SubMenuBorder"
-                                            BorderBrush="{DynamicResource ToolbarBorderBrush}"
-                                            BorderThickness="1"
-                                            Background="{DynamicResource MainBackground}"
-                                            SnapsToDevicePixels="True">
-                                        <Grid x:Name="SubMenu"
-                                                Grid.IsSharedSizeScope="True"
-                                                Margin="2">
-                                            <StackPanel IsItemsHost="True"
-                                                        KeyboardNavigation.DirectionalNavigation="Cycle" />
-                                        </Grid>
-                                        <Border.Effect>
-                                            <DropShadowEffect ShadowDepth="2"
-                                                                Color="Black"
-                                                                Opacity="0.35" />
-                                        </Border.Effect>
-                                    </Border>
-                                    <!--Border 3-->
-                                    <Border Margin="1,0,0,0"
-                                            x:Name="TransitionBorder"
-                                            Width="0"
-                                            Height="2"
-                                            VerticalAlignment="Top"
-                                            HorizontalAlignment="Left"
-                                            Background="{DynamicResource MainBackground}"
-                                            SnapsToDevicePixels="False"
-                                            BorderThickness="1"
-                                            BorderBrush="{DynamicResource MainBackground}" />
-                                </Grid>
-                            </Popup>
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
+							</Border>
+							<ContentPresenter x:Name="HeaderHost"
+											  Grid.Column="2"
+											  RecognizesAccessKey="True"
+											  ContentSource="Header"
+											  VerticalAlignment="Center"
+											  Margin="0,1,10,1" />
+							<ContentPresenter Grid.Column="3"
+											  Margin="20,1,8,1"
+											  x:Name="IGTHost"
+											  ContentSource="InputGestureText"
+											  VerticalAlignment="Center" />
+							
+							<Grid Grid.Column="4"
+								  Margin="4,0,6,0"
+								  x:Name="ArrowPanel"
+								  VerticalAlignment="Center">
+								<Path x:Name="ArrowPanelPath"
+									  HorizontalAlignment="Right"
+									  VerticalAlignment="Center"
+									  Fill="{TemplateBinding Foreground}"
+									  Data="M0,0 L0,8 L4,4 z" />
+							</Grid>
+							<Popup IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
+								   Placement="Right"
+								   HorizontalOffset="-1"
+								   x:Name="SubMenuPopup"
+								   Focusable="false"
+								   PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
+								   AllowsTransparency="True">
+								<Grid Margin="0,0,5,5">
+									<!--Border 2-->
+									<Border x:Name="SubMenuBorder"
+											BorderBrush="{DynamicResource ToolbarBorderBrush}"
+											BorderThickness="1"
+											Background="{DynamicResource MainBackground}"
+											SnapsToDevicePixels="True">
+										<Grid x:Name="SubMenu"
+											  Grid.IsSharedSizeScope="True"
+											  Margin="2">
+											<StackPanel IsItemsHost="True"
+														KeyboardNavigation.DirectionalNavigation="Cycle" />
+										</Grid>
+										<Border.Effect>
+											<DropShadowEffect ShadowDepth="2"
+															  Color="Black"
+															  Opacity="0.35" />
+										</Border.Effect>
+									</Border>
+									<!--Border 3-->
+									<Border Margin="1,0,0,0"
+											x:Name="TransitionBorder"
+											Width="0"
+											Height="2"
+											VerticalAlignment="Top"
+											HorizontalAlignment="Left"
+											Background="{DynamicResource MainBackground}"
+											SnapsToDevicePixels="False"
+											BorderThickness="1"
+											BorderBrush="{DynamicResource MainBackground}" />
+								</Grid>
+							</Popup>
+						</Grid>
+					</Border>
+					<ControlTemplate.Triggers>
                         <Trigger Property="Icon" Value="{x:Null}">
                             <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
                         </Trigger>
@@ -207,6 +215,8 @@
             </Setter.Value>
         </Setter>
     </Style>
+	
+	<Style x:Key="{x:Type MenuItem}" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource MenuItemStyle}" />
 
     <Style x:Key="{x:Type Menu}" TargetType="{x:Type Menu}">
         <Style.Resources>
@@ -222,7 +232,6 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            <Style x:Key="{x:Type MenuItem}" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource MenuItemStyle}" />
         </Style.Resources>
         <Setter Property="Background" Value="{x:Null}" />
         <Setter Property="Foreground" Value="{DynamicResource MainForeground}" />

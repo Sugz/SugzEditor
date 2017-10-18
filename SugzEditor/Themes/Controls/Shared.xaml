@@ -23,7 +23,12 @@
         <Setter Property="Command" Value="{Binding Explorer.AddFolderCommand, Source={StaticResource Locator}}" />
         <Setter Property="CommandParameter" Value="{Binding}" />
     </Style>
-	
+	<Style x:Key="MaxInstallsStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource MenuItemStyle}">
+        <Setter Property="Icon" Value="{Binding Icon}"/>
+		<Setter Property="Header" Value="{Binding Title}"/>
+		<Setter Property="Command" Value="{Binding Main.LunchMaxCommand, Source={StaticResource Locator}}" />
+		<Setter Property="CommandParameter" Value="{Binding}" />
+    </Style>
 
 
     <Style x:Key="{x:Type ContextMenu}" TargetType="{x:Type ContextMenu}">

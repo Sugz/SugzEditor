@@ -1,4 +1,7 @@
-﻿using GalaSoft.MvvmLight.Threading;
+﻿using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Threading;
+using SugzEditor.Src.Settings;
+using SugzEditor.Views;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,7 +20,12 @@ namespace SugzEditor
     {
 		static App()
 		{
+			//ViewLocator viewLocator = new ViewLocator();
+			SimpleIoc.Default.Register<SettingsConfigProvider>();
 			DispatcherHelper.Initialize();
 		}
-    }
+
+	}
+
+	
 }

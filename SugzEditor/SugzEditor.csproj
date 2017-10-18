@@ -70,6 +70,12 @@
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.3.1.953, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.3.1.953\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -81,6 +87,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -102,27 +109,78 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Control\SgzSplitButton.cs" />
-    <Compile Include="Control\SgzTabControl.cs" />
-    <Compile Include="Control\SgzTabItem.cs" />
+    <Compile Include="Controls\ButtonHelper.cs" />
+    <Compile Include="Controls\GestureTextBox.cs" />
+    <Compile Include="Controls\InputKeyTextBox.cs" />
+    <Compile Include="Controls\Windows\SgzDialog.cs" />
+    <Compile Include="Controls\SgzSplitButton.cs" />
+    <Compile Include="Controls\SgzTabControl.cs" />
+    <Compile Include="Controls\SgzTabItem.cs" />
+    <Compile Include="Controls\Windows\SgzWindow.cs" />
+    <Compile Include="Controls\TreeViewHelper.cs" />
+    <Compile Include="Controls\TreeViewItemHelper.cs" />
     <Compile Include="Models\MaxInstall.cs" />
-    <Compile Include="Models\Messages\ActiveMaxProcessMessage.cs" />
-    <Compile Include="Models\Messages\ClosedMaxProcessMessage.cs" />
-    <Compile Include="Source\FileTypes.cs" />
-    <Compile Include="Source\NativeMethods.cs" />
-    <Compile Include="Source\SgzConstants.cs" />
-    <Compile Include="Themes\IconProvider.cs" />
+    <Compile Include="Models\NewFileModel.cs" />
+    <Compile Include="Sources\Messages\ActiveMaxProcessMessage.cs" />
+    <Compile Include="Sources\Messages\ClosedMaxProcessMessage.cs" />
+    <Compile Include="Sources\Messages\OpenWindowMessage.cs" />
+    <Compile Include="Models\Options\BaseOptionModel.cs" />
+    <Compile Include="Models\Options\ShortcutModel.cs" />
+    <Compile Include="Sources\Commands\SgzCommandGeneric.cs" />
+    <Compile Include="Sources\HelperMethods.cs" />
+    <Compile Include="Sources\Commands\SgzCommand.cs" />
+    <Compile Include="Sources\SgzRelayCommand.cs" />
+    <Compile Include="Sources\FileTypes.cs" />
+    <Compile Include="Sources\NativeMethods.cs" />
+    <Compile Include="Sources\Settings\AppSettings.cs" />
+    <Compile Include="Sources\Settings\AppSettingsLocator.cs" />
+    <Compile Include="Sources\Settings\SettingsConfigProvider.cs" />
+    <Compile Include="Sources\SgzConstants.cs" />
+    <Compile Include="Sources\WindowType.cs" />
+    <Compile Include="Themes\Colors\ColorHelper.cs" />
+    <Compile Include="Themes\Colors\ColorRGB.cs" />
+    <Compile Include="Themes\Converters\LeftMarginMultiplierConverter.cs" />
+    <Compile Include="Themes\Icons\IconProvider.cs" />
     <Compile Include="Themes\ThemeSelector.cs" />
+    <Compile Include="ViewModels\Data\FolderViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel\MainViewModel_Datas.cs" />
-    <Compile Include="ViewModels\MaxProcessViewModel.cs" />
-    <Compile Include="ViewModels\Base\DataItemViewModel.cs" />
-    <Compile Include="ViewModels\FileViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel\MainViewModel_MaxProcess.cs" />
+    <Compile Include="ViewModels\MainViewModel\MainViewModel_TextEditor.cs" />
+    <Compile Include="ViewModels\Others\MaxProcessViewModel.cs" />
+    <Compile Include="ViewModels\Data\DataItemViewModel.cs" />
+    <Compile Include="ViewModels\Data\FileViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModels\SgzExplorerViewModel.cs" />
+    <Compile Include="ViewModels\Options\OptionsViewModel.cs" />
+    <Compile Include="ViewModels\Others\NewFileViewModel.cs" />
+    <Compile Include="ViewModels\Others\SgzExplorerViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="ViewModels\Workspace.cs" />
-    <Compile Include="Views\ToolbarView.xaml.cs">
+    <Compile Include="Views\MainWindow\ExplorerView.xaml.cs">
+      <DependentUpon>ExplorerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindow\MenusView.xaml.cs">
+      <DependentUpon>MenusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindow\StatusBarView.xaml.cs">
+      <DependentUpon>StatusBarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Options\OptionsDialog.xaml.cs">
+      <DependentUpon>OptionsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindow\ToolbarView.xaml.cs">
       <DependentUpon>ToolbarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Options\ShortcutDialog.xaml.cs">
+      <DependentUpon>ShortcutDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Options\ShortcutsView.xaml.cs">
+      <DependentUpon>ShortcutsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Options\InterfaceView.xaml.cs">
+      <DependentUpon>InterfaceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Other\NewFileView.xaml.cs">
+      <DependentUpon>NewFileView.xaml</DependentUpon>
     </Compile>
     <Page Include="Themes\Colors\DarkColors.xaml">
       <SubType>Designer</SubType>
@@ -132,11 +190,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Colors\Originals\DarkColors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Colors\Originals\LightColors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Controls\Buttons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Controls\DialogHost.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Controls\GridSplitter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Controls\Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Windows\SgzDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,15 +230,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Windows\SgzWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Controls\Shared.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\Icons.xaml">
+    <Page Include="Themes\Controls\Slider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainWindow.xaml">
+    <Page Include="Themes\Controls\Treeview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Icons\Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow\ExplorerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -168,11 +266,43 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\ToolbarView.xaml">
+    <Page Include="Views\MainWindow\MainWindow_InputBindings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow\MenusView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow\StatusBarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Options\OptionsDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow\ToolbarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Options\ShortcutDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Options\ShortcutsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Options\InterfaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Other\NewFileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -245,10 +375,26 @@
     <Resource Include="Images\property-blue.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Themes\Converters\" />
+    <Folder Include="Sources\Converters\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\SugzEditor.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\3dsMaxIcons\3dsMax2009.png" />
+    <Resource Include="Resources\3dsMaxIcons\3dsMax2010.png" />
+    <Resource Include="Resources\3dsMaxIcons\3dsMax2011.png" />
+    <Resource Include="Resources\3dsMaxIcons\3dsMax2012.png" />
+    <Resource Include="Resources\3dsMaxIcons\3dsMax2013.png" />
+    <Resource Include="Resources\3dsMaxIcons\3dsMax2014.png" />
+    <Resource Include="Resources\3dsMaxIcons\3dsMax2015.png" />
+    <Resource Include="Resources\3dsMaxIcons\3dsMax2016.png" />
+    <Resource Include="Resources\3dsMaxIcons\3dsMax2017.png" />
+    <Resource Include="Resources\3dsMaxIcons\3dsMax2018.png" />
+    <Resource Include="Resources\3dsMaxIcons\3dsMax8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Option.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -43,19 +43,19 @@ namespace SugzEditor.ViewModels
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<SgzExplorerViewModel>();
-        }
+			SimpleIoc.Default.Register<OptionsViewModel>();
+		}
 
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
-        public SgzExplorerViewModel Explorer => ServiceLocator.Current.GetInstance<SgzExplorerViewModel>();
+		public OptionsViewModel Option => ServiceLocator.Current.GetInstance<OptionsViewModel>();
 
-        public static void Cleanup()
+		public static void Cleanup()
         {
-            // TODO Clear the ViewModels
-        }
+			ServiceLocator.Current.GetInstance<MainViewModel>().Cleanup();
+		}
     }
 }

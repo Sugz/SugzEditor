@@ -1,0 +1,178 @@
+﻿<UserControl x:Class="SugzEditor.Views.MenusView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:controls="clr-namespace:SugzEditor.Controls"
+			 xmlns:sgzconv="clr-namespace:SugzTools.Converters;assembly=SugzTools"
+			 xmlns:src="clr-namespace:SugzEditor.Src"
+			 mc:Ignorable="d"
+			 d:DesignHeight="30"
+			 d:DesignWidth="300"
+			 Foreground="{DynamicResource MainForeground}"
+			 DataContext="{Binding Main, Source={StaticResource Locator}}" >
+
+	<UserControl.Resources>
+		<sgzconv:InvertBooleanConverter x:Key="InvertBool" />
+	</UserControl.Resources>
+
+	<Grid Height="30"
+		  WindowChrome.IsHitTestVisibleInChrome="True">
+		<TextBlock Text="Sugz Editor" 
+				   HorizontalAlignment="Center" 
+				   VerticalAlignment="Center" />
+		<DockPanel>
+			<Button Style="{DynamicResource WindowIconButtonStyle}"
+					Command="{Binding Source={x:Static SystemCommands.ShowSystemMenuCommand}}">
+				<Path Data="M0.997,8.596c0.027,-0.072 0.084,-0.128 0.156,-0.155c0.071,-0.026 0.151,-0.021 0.218,0.016c0.476,0.257 1.473,0.796 1.992,1.076c0.084,0.046 0.185,0.054 0.276,0.023c0.091,-0.031 0.166,-0.099 0.204,-0.188c0.216,-0.489 0.616,-1.401 0.906,-2.058c0.083,-0.19 0.248,-0.332 0.448,-0.388c0.2,-0.055 0.414,-0.017 0.583,0.103c0.416,0.296 0.918,0.654 1.199,0.854c0.052,0.037 0.118,0.047 0.178,0.028c0.06,-0.02 0.108,-0.066 0.129,-0.126c0.069,-0.195 0.162,-0.462 0.228,-0.65c0.047,-0.135 0.004,-0.285 -0.108,-0.373c-0.354,-0.278 -1.138,-0.896 -1.752,-1.38c-0.492,-0.387 -0.648,-1.065 -0.376,-1.629c0.408,-0.847 0.99,-2.057 1.348,-2.798c0.072,-0.15 0.213,-0.255 0.378,-0.281c0.164,-0.025 0.33,0.031 0.445,0.152c0.745,0.787 2.128,2.247 2.833,2.991c0.269,0.285 0.36,0.695 0.236,1.067c-0.213,0.638 -0.541,1.619 -0.703,2.104c-0.059,0.177 -0.006,0.372 0.134,0.495c0.326,0.285 0.911,0.798 1.182,1.035c0.087,0.077 0.12,0.199 0.083,0.309c-0.049,0.147 -0.119,0.355 -0.173,0.518c-0.02,0.058 -0.066,0.102 -0.125,0.12c-0.058,0.018 -0.122,0.006 -0.17,-0.032c-0.298,-0.234 -0.861,-0.676 -1.323,-1.038c-0.44,-0.346 -0.617,-0.931 -0.442,-1.463c0.245,-0.747 0.577,-1.757 0.71,-2.162c0.036,-0.11 0.007,-0.231 -0.075,-0.313c-0.423,-0.423 -1.737,-1.737 -2.216,-2.216c-0.039,-0.04 -0.096,-0.057 -0.15,-0.046c-0.055,0.011 -0.101,0.049 -0.121,0.101c-0.165,0.405 -0.506,1.243 -0.7,1.718c-0.085,0.209 -0.026,0.449 0.146,0.595c0.374,0.318 1.035,0.881 1.513,1.288c0.346,0.294 0.471,0.772 0.313,1.197c-0.202,0.545 -0.478,1.292 -0.677,1.827c-0.061,0.164 -0.192,0.293 -0.358,0.35c-0.166,0.057 -0.348,0.037 -0.498,-0.055c-0.37,-0.229 -0.823,-0.508 -1.099,-0.678c-0.062,-0.039 -0.138,-0.048 -0.208,-0.026c-0.07,0.022 -0.127,0.074 -0.156,0.141c-0.177,0.412 -0.523,1.22 -0.81,1.889c-0.122,0.282 -0.352,0.503 -0.64,0.611c-0.287,0.108 -0.606,0.095 -0.883,-0.037c-0.779,-0.372 -1.783,-0.85 -2.272,-1.083c-0.166,-0.079 -0.243,-0.272 -0.178,-0.444c0.108,-0.286 0.27,-0.711 0.375,-0.989Z"
+					  Width="16"
+					  Height="16"
+					  Stretch="Uniform"
+					  Fill="{DynamicResource MainForeground}"
+					  UseLayoutRounding="True"
+					  SnapsToDevicePixels="True" />
+			</Button>
+			<Menu VerticalAlignment="Center"
+				  HorizontalAlignment="Left">
+				<!--File-->
+				<MenuItem Header="{x:Static src:SgzConstants.MenuName_File}">
+					<MenuItem Header="{Binding NewFileCommand.Text}"
+							  InputGestureText="{Binding NewFileCommand.InputGestureText}"
+							  Icon="{DynamicResource NewFile_16x}"
+							  Command="{Binding NewFileCommand}" />
+					<Separator />
+					<MenuItem Header="{Binding OpenFileCommand.Text}"
+							  InputGestureText="{Binding OpenFileCommand.InputGestureText}"
+							  Icon="{DynamicResource OpenFile_16x}" 
+							  Command="{Binding OpenFileCommand}"/>
+					<MenuItem Header="{Binding OpenFolderCommand.Text}"
+							  InputGestureText="{Binding OpenFolderCommand.InputGestureText}"
+							  Icon="{DynamicResource OpenFolder_16x}"
+							  Command="{Binding OpenFolderCommand, Mode=OneWay}" />
+
+					<Separator />
+					<MenuItem Header="Recent Files"
+							  ItemsSource="{Binding RecentFiles}"
+							  ItemTemplate="{DynamicResource RecentItemsTemplate}"
+							  ItemContainerStyle="{DynamicResource RecentFileMenuItemStyle}" />
+					<MenuItem Header="Recent Folders"
+							  ItemsSource="{Binding RecentFolders}"
+							  ItemTemplate="{DynamicResource RecentItemsTemplate}"
+							  ItemContainerStyle="{DynamicResource RecentFolderMenuItemStyle}" />
+					<Separator />
+					<MenuItem Header="{Binding SaveFileCommand.Text}"
+							  InputGestureText="{Binding SaveFileCommand.InputGestureText}"
+							  Icon="{DynamicResource Save_16x}"
+							  Command="{Binding SaveFileCommand}" />
+					<MenuItem Header="{Binding SaveFileAsCommand.Text}"
+							  InputGestureText="{Binding SaveFileAsCommand.InputGestureText}"
+							  Icon="{DynamicResource SaveAs_16x}"
+							  Command="{Binding SaveFileAsCommand}" />
+					<MenuItem Header="{Binding SaveAllCommand.Text}"
+							  InputGestureText="{Binding SaveAllCommand.InputGestureText}"
+							  Icon="{DynamicResource SaveAll_16x}"
+							  Command="{Binding SaveAllCommand}" />
+					<Separator />
+					<MenuItem Header="Exit"
+							  Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
+							  Icon="{DynamicResource Close_16x}" />
+				</MenuItem>
+
+				<!--Edit-->
+				<MenuItem Header="{x:Static src:SgzConstants.MenuName_Edit}">
+					<MenuItem Header="{Binding UndoCommand.Text}"
+							  InputGestureText="{Binding UndoCommand.InputGestureText}"
+							  Icon="{DynamicResource Undo_16x}"
+							  Command="{Binding UndoCommand}" />
+					<MenuItem Header="{Binding RedoCommand.Text}"
+							  InputGestureText="{Binding RedoCommand.InputGestureText}"
+							  Icon="{DynamicResource Redo_16x}"
+							  Command="{Binding RedoCommand}" />
+				</MenuItem>
+
+				<!--Evaluate-->
+				<MenuItem Header="{x:Static src:SgzConstants.MenuName_Evaluate}">
+					<MenuItem Header="{Binding EvaluateCommand.Text}"
+							  InputGestureText="{Binding EvaluateCommand.InputGestureText}"
+							  Command="{Binding EvaluateCommand}">
+						<MenuItem.Style>
+							<Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource MenuItemStyle}">
+								<Style.Triggers>
+									<Trigger Property="IsEnabled" Value="True">
+										<Setter Property="Icon" Value="{DynamicResource Run_16x}" />
+									</Trigger>
+									<Trigger Property="IsEnabled" Value="False">
+										<Setter Property="Icon" Value="{DynamicResource RunDisable_16x}" />
+										<Setter Property="Foreground" Value="{DynamicResource DisabledForeground}" />
+									</Trigger>
+								</Style.Triggers>
+							</Style>
+						</MenuItem.Style>
+					</MenuItem>
+					<MenuItem Header="{Binding EvaluateSelectedCommand.Text}"
+							  InputGestureText="{Binding EvaluateSelectedCommand.InputGestureText}"
+							  Command="{Binding EvaluateSelectedCommand}" >
+						<MenuItem.Style>
+							<Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource MenuItemStyle}">
+								<Style.Triggers>
+									<Trigger Property="IsEnabled" Value="True">
+										<Setter Property="Icon" Value="{DynamicResource RunSelected_16x}" />
+									</Trigger>
+									<Trigger Property="IsEnabled" Value="False">
+										<Setter Property="Icon" Value="{DynamicResource RunSelectedDisable_16x}" />
+										<Setter Property="Foreground" Value="{DynamicResource DisabledForeground}" />
+									</Trigger>
+								</Style.Triggers>
+							</Style>
+						</MenuItem.Style>
+					</MenuItem>
+					<Separator />
+					<MenuItem Header="{Binding GetMaxProcessCommand.Text}"
+							  InputGestureText="{Binding GetMaxProcessCommand.InputGestureText}"
+							  Icon="{DynamicResource Refresh_16x}"
+							  Command="{Binding GetMaxProcessCommand}" />
+					<MenuItem Header="{Binding LunchDefaultMaxCommand.Text}"
+							  InputGestureText="{Binding LunchDefaultMaxCommand.InputGestureText}"
+							  Icon="{DynamicResource 3dsMax_16x}"
+							  Command="{Binding LunchDefaultMaxCommand}" />
+				</MenuItem>
+
+				<!--View-->
+				<MenuItem Header="{x:Static src:SgzConstants.MenuName_View}">
+					<MenuItem Header="Interface">
+						<MenuItem Header="{Binding ShowToolbarCommand.Text}"
+								  Command="{Binding ShowToolbarCommand}"
+								  IsCheckable="True"
+								  IsChecked="{Binding ShowToolbar, Mode=OneWay}"
+								  Icon="{DynamicResource Toolbar_16x}" />
+						<MenuItem Header="{Binding ShowExplorerCommand.Text}"
+								  Command="{Binding ShowExplorerCommand}"
+								  IsCheckable="True"
+								  IsChecked="{Binding ShowExplorer, Mode=OneWay}"
+								  Icon="{DynamicResource Treeview_16x}" />
+						<MenuItem Header="{Binding ShowTabsCommand.Text}"
+								  Command="{Binding ShowTabsCommand}"
+								  IsCheckable="True"
+								  IsChecked="{Binding ShowTabs, Mode=OneWay}"
+								  Icon="{DynamicResource Tabs_16x}" />
+					</MenuItem>
+					<MenuItem Header="Theme">
+						<MenuItem Header="{x:Static src:SgzConstants.ThemeDark}"
+								  IsCheckable="True"
+								  IsChecked="{Binding IsDarkTheme}" />
+						<MenuItem Header="{x:Static src:SgzConstants.ThemeLight}"
+								  IsCheckable="True"
+								  IsChecked="{Binding IsDarkTheme, Converter={StaticResource InvertBool}}" />
+					</MenuItem>
+					<Separator />
+					<MenuItem Header="{Binding OpenOptionsCommand.Text}"
+							  InputGestureText="{Binding OpenOptionsCommand.InputGestureText}"
+							  Icon="{DynamicResource Option_16x}"
+							  Command="{Binding OpenOptionsCommand}" />
+				
+				</MenuItem>
+			</Menu>
+		</DockPanel>
+		
+	</Grid>
+</UserControl>

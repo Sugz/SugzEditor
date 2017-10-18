@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="SugzEditor.Views.StatusBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SugzEditor.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="25" 
+			 d:DesignWidth="300"
+			 DataContext="{Binding Main, Source={StaticResource Locator}}">
+	
+	<StackPanel Orientation="Horizontal"
+				Background="{DynamicResource ToolbarBackground}"
+				Height="25">
+		<TextBlock Text="{Binding Status}"
+				   Foreground="{DynamicResource MainForeground}"
+				   Margin="5,0"
+				   VerticalAlignment="Center" />
+	</StackPanel>
+	
+</UserControl>

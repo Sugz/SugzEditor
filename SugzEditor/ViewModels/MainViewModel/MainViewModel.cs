@@ -13,6 +13,16 @@ using System.Collections.Generic;
 using System.Windows.Threading;
 using GalaSoft.MvvmLight.Threading;
 using SugzEditor.Models;
+using Microsoft.Win32;
+using SugzEditor.Themes;
+using System.Windows;
+using SugzEditor.Src.Settings;
+using GalaSoft.MvvmLight.Ioc;
+using SugzEditor.Views;
+using SugzEditor.Controls;
+using SugzEditor.Src.Commands;
+using System.Windows.Controls;
+using SugzEditor.Themes.Colors;
 
 namespace SugzEditor.ViewModels
 {
@@ -31,31 +41,163 @@ namespace SugzEditor.ViewModels
     public partial class MainViewModel : ViewModelBase
     {
 
+		#region Fields
+
+		private SettingsConfigProvider _SettingsProvider = SimpleIoc.Default.GetInstance<SettingsConfigProvider>();
+		private DispatcherTimer _Timer;
+		
+		private bool _IsDarkTheme;
+		private double _Temperature = 0d;
+		private double _Brightness = 1d;
+		private double _Contrast = 1d;
+		private bool _ShowToolbar;
+		private bool _ShowExplorer;
+		private double _SavedExplorerWidth;
+		private GridLength _ExplorerGridWidth;
+		private bool _ShowTabs;
+		private string _Status;
+
+		#endregion Fields
+
 
 		#region Properties
 
 
-		#region 3ds Max process button text
-		private string _MaxProcessButtonText;
+		public ICommand[] UICommands { get; set; }
+
 		/// <summary>
-		/// Get or set the text display in the 3ds max process split button
+		/// Get or set if the theme is dark or light
 		/// </summary>
-		public string MaxProcessButtonText
+		public bool IsDarkTheme
 		{
-			get => _MaxProcessButtonText;
+			get => _IsDarkTheme;
 			set
 			{
-				if (value != _MaxProcessButtonText)
+				Set(ref _IsDarkTheme, value);
+				ThemeSelector.SetTheme(value);
+				Brightness = _Brightness;
+				Contrast = _Contrast;
+			}
+		}
+
+		/// <summary>
+		/// TODO: temperature implementation ?
+		/// </summary>
+		public double Temperature
+		{
+			get => _Temperature;
+			set
+			{
+				double i = (value <= TemperatureMin ? TemperatureMin : (value >= TemperatureMax ? TemperatureMax : value));
+				Set(ref _Temperature, i);
+				//if (Contrast != 1d)
+				//	ColorHelper.SetTemperatureAndContrast(value, Contrast);
+				//else
+				//	ColorHelper.SetTemperature(value);
+			}
+		}
+		public double TemperatureMin { get; set; } = -1d;
+		public double TemperatureMax { get; set; } = 1d;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public double Brightness
+		{
+			get => _Brightness;
+			set
+			{
+				double i = (value <= BrightnessMin ? BrightnessMin : (value >= BrightnessMax ? BrightnessMax : value));
+				Set(ref _Brightness, i);
+				if (Contrast != 1d)
+					ColorHelper.SetBrightnessAndContrast(value, Contrast);
+				else
+					ColorHelper.SetBrightness(value);
+			}
+		}
+		public double BrightnessMin { get; set; } = -1d;
+		public double BrightnessMax { get; set; } = 1d;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public double Contrast
+		{
+			get => _Contrast;
+			set
+			{
+				double i = (value <= ContrastMin ? ContrastMin : (value >= ContrastMax ? ContrastMax : value));
+				Set(ref _Contrast, i);
+				if (Brightness != 1d)
+					ColorHelper.SetBrightnessAndContrast(Brightness, value);
+				else
+					ColorHelper.SetContrast(value);
+			}
+		}
+		public double ContrastMin { get; set; } = 0.5d;
+		public double ContrastMax { get; set; } = 1.5d;
+
+		/// <summary>
+		/// Get or set the toolbar visibility
+		/// </summary>
+		public bool ShowToolbar
+		{
+			get => _ShowToolbar;
+			set => Set(ref _ShowToolbar, value);
+		}
+
+		/// <summary>
+		/// Get or set the explorer visibility
+		/// </summary>
+		public bool ShowExplorer
+		{
+			get => _ShowExplorer;
+			set
+			{
+				Set(ref _ShowExplorer, value);
+				ShowHideExplorer();
+			}
+		}
+
+		/// <summary>
+		/// Get or set the explorer grid column width
+		/// </summary>
+		public GridLength ExplorerGridWidth
+		{
+			get => _ExplorerGridWidth;
+			set
+			{
+				Set(ref _ExplorerGridWidth, value);
+				if (value.Value != 0)
+					_SavedExplorerWidth = value.Value;
+			}
+		}
+
+		/// <summary>
+		/// Get or set the tabs visibility 
+		/// </summary>
+		public bool ShowTabs
+		{
+			get => _ShowTabs;
+			set => Set(ref _ShowTabs, value);
+		}
+
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string Status
+		{
+			get => _Status;
+			set
+			{
+				if (value != _Status)
 				{
-					Set(ref _MaxProcessButtonText, value);
+					Set(ref _Status, value);
 				}
 			}
 		}
-		#endregion 3ds Max process button text
 
-		public ObservableCollection<MaxProcessViewModel> MaxProcess { get; private set; } = new ObservableCollection<MaxProcessViewModel>();
-		//public Dictionary<string, string> MaxInstalls { get; private set; } = new Dictionary<string, string>(); 
-		public MaxInstall[] MaxInstalls { get; private set; }
 
 		#endregion Properties
 
@@ -63,71 +205,59 @@ namespace SugzEditor.ViewModels
 
 		#region Commands
 
+		private RelayCommand<bool> _SetThemeCommand;
+		public ICommand SetThemeCommand => _SetThemeCommand ?? 
+			(_SetThemeCommand = new RelayCommand<bool>(x => IsDarkTheme = x));
 
-		#region ExecuteCodeCommand
-		private RelayCommand _ExecuteCodeCommand;
-		public RelayCommand ExecuteCodeCommand => _ExecuteCodeCommand ?? (_ExecuteCodeCommand = new RelayCommand(ExecuteCode, CanExecuteCode));
+		private SgzRelayCommand _UpBrightnessCommand;
+		public ICommand UpBrightnessCommand => _UpBrightnessCommand ??
+			(_UpBrightnessCommand = new SgzRelayCommand(() => Brightness += 0.05d, key:Key.Add, modifiers:ModifierKeys.Control, text:"Increase Brightness"));
 
-		private bool CanExecuteCode()
+		private SgzRelayCommand _DownBrightnessCommand;
+		public ICommand DownBrightnessCommand => _DownBrightnessCommand ??
+			(_DownBrightnessCommand = new SgzRelayCommand(() => Brightness -= 0.05d, key: Key.Subtract, modifiers: ModifierKeys.Control, text: "Decrease Brightness"));
+
+		private SgzRelayCommand _UpContrastCommand;
+		public ICommand UpContrastCommand => _UpContrastCommand ??
+			(_UpContrastCommand = new SgzRelayCommand(() => Contrast += 0.05d, key: Key.Add, modifiers: ModifierKeys.Shift, text: "Increase Contrast"));
+
+		private SgzRelayCommand _DownContrastCommand;
+		public ICommand DownContrastCommand => _DownContrastCommand ??
+			(_DownContrastCommand = new SgzRelayCommand(() => Contrast -= 0.05d, key: Key.Subtract, modifiers: ModifierKeys.Shift, text: "Decrease Contrast"));
+
+
+
+		private SgzRelayCommand _ShowToolbarCommand;
+		public ICommand ShowToolbarCommand => _ShowToolbarCommand ??
+			(_ShowToolbarCommand = new SgzRelayCommand(() => ShowToolbar = !ShowToolbar, text: "Show Toolbar", icon: "Toolbar_16x"));
+
+		private SgzRelayCommand _ShowExplorerCommand;
+		public ICommand ShowExplorerCommand => _ShowExplorerCommand ??
+			(_ShowExplorerCommand = new SgzRelayCommand(() => ShowExplorer = !ShowExplorer, text: "Show Explorer", icon: "Treeview_16x"));
+
+		private SgzRelayCommand _ShowTabsCommand;
+		public ICommand ShowTabsCommand => _ShowTabsCommand ??
+			(_ShowTabsCommand = new SgzRelayCommand(() => ShowTabs = !ShowTabs, text: "Show Tabs", icon: "Tabs_16x"));
+
+		private SgzRelayCommand _OpenOptionsCommand;
+		public ICommand OpenOptionsCommand => _OpenOptionsCommand ??
+			(_OpenOptionsCommand = new SgzRelayCommand(OpenOptions, key: Key.O, modifiers: ModifierKeys.Control, text: "Options", icon: "Option_16x"));
+
+		private void OpenOptions()
 		{
-			return (MaxProcess.Any(x => x.IsChecked) && ActiveDocument != null);
+			MessengerInstance.Send(new OpenDialogMessage(WindowType.Options));
 		}
 
-		private void ExecuteCode()
+
+		private SgzRelayCommand _SetShortcutCommand;
+		public ICommand SetShortcutCommand => _SetShortcutCommand ??
+			(_SetShortcutCommand = new SgzRelayCommand(SetShortcut, text: "Set Shortcut"));
+
+		private void SetShortcut()
 		{
-			foreach (MaxProcessViewModel maxSession in MaxProcess.Where(x => x.IsChecked))
-				Debug.WriteLine($"Executing code from {ActiveDocument.Title} to {maxSession.Title}");
+			((SgzRelayCommand)UndoCommand).Text = "Test";
+			((SgzRelayCommand)UndoCommand).GestureModifiers = ModifierKeys.Shift;
 		}
-		#endregion ExecuteCodeCommand
-
-
-		#region GetMaxProcessCommand
-		private RelayCommand _GetMaxProcessCommand;
-		public ICommand GetMaxProcessCommand => _GetMaxProcessCommand ?? (_GetMaxProcessCommand = new RelayCommand(GetMaxProcess));
-
-		private void GetMaxProcess()
-		{
-			foreach (Process process in Process.GetProcessesByName("3dsmax"))
-			{
-				if (!MaxProcess.Any(x => x.Process.Id == process.Id))
-				{
-					MaxProcessViewModel maxProcessViewModel = new MaxProcessViewModel(process);
-					MaxProcess.Add(maxProcessViewModel);
-				}
-			}
-			SetMaxProcessButtonText();
-		}
-		#endregion GetMaxProcessCommand
-
-
-		#region LunchMaxCommand
-		private RelayCommand<string> _LunchMaxCommand;
-		public ICommand LunchMaxCommand => _LunchMaxCommand ?? (_LunchMaxCommand = new RelayCommand<string>(LunchMax));
-
-		private void LunchMax(string key)
-		{
-			Process.Start(MaxInstalls[key]);
-			DispatcherTimer _Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(5) };
-			_Timer.Tick += (s, e) =>
-			{
-				// Monitor the process to know when connection is available
-				foreach (Process process in Process.GetProcessesByName("3dsmax"))
-				{
-					if (!MaxProcess.Any(x => x.Process.Id == process.Id) &&
-						MaxProcessViewModel.GetMacroRecorder(process.MainWindowHandle) != null)
-					{
-						MaxProcessViewModel maxProcessViewModel = new MaxProcessViewModel(process);
-						MaxProcess.Add(maxProcessViewModel);
-						maxProcessViewModel.IsChecked = true;
-						SetMaxProcessButtonText();
-						_Timer.Stop();
-					}
-				}
-			};
-			_Timer.Start();
-		}
-
-		#endregion LunchMaxCommand 
 
 
 		#endregion Commands
@@ -139,8 +269,10 @@ namespace SugzEditor.ViewModels
 		/// </summary>
 		public MainViewModel()
         {
+			LoadSettings();
 			GetMaxInstalls();
 			GetMaxProcess();
+			GetCommands();
 
 			MessengerInstance.Register<ActiveMaxProcessMessage>(this, x => SetMaxProcessButtonText());
 			MessengerInstance.Register<ClosedMaxProcessMessage>(this, x =>
@@ -150,44 +282,89 @@ namespace SugzEditor.ViewModels
 			});
 		}
 
+		
 
 
 		#region Methods
 
-
-		/// <summary>
-		/// Get 3ds max installs
-		/// </summary>
-		private void GetMaxInstalls()
+		public override void Cleanup()
 		{
-			string[] paths = MaxFolders.Get().Values.ToArray();
-			MaxInstalls = new MaxInstall[paths.Length];
-			for (int i = 0; i < paths.Length; i++)
-				MaxInstalls[i] = new MaxInstall(paths[i]);
-
-			//foreach (string path in MaxFolders.Get().Values)
-			//	MaxInstalls.Add(
-			//		path.Split('\\').Last(),
-			//		path + "\\3dsmax.exe"
-			//	);
+			base.Cleanup();
+			SaveSettings();
 		}
 
 
 		/// <summary>
-		/// Set the text display in the 3ds max process button
+		/// Load user settings
 		/// </summary>
-		private void SetMaxProcessButtonText()
+		private void LoadSettings()
 		{
-			ExecuteCodeCommand.RaiseCanExecuteChanged();
-			if (MaxProcess.Count == 0)
-				MaxProcessButtonText = "No 3ds Max process";
-			else if (MaxProcess.Where(s => s.IsChecked).Count() > 1)
-				MaxProcessButtonText = "Mutiple process";
-			else if (MaxProcess.FirstOrDefault(s => s.IsChecked) is MaxProcessViewModel instance)
-				MaxProcessButtonText = instance.Title.Replace("Autodesk ", "");
+			_SettingsProvider.Load();
+
+			IsDarkTheme = _SettingsProvider.IsDarktheme;
+			Brightness = _SettingsProvider.Brightness;
+			Contrast = _SettingsProvider.Contrast;
+			ShowToolbar = _SettingsProvider.ShowToolbar;
+			ExplorerGridWidth = new GridLength(_SettingsProvider.ExplorerGridWidth);
+			ShowExplorer = _SettingsProvider.ShowExplorer;
+			ShowTabs = _SettingsProvider.ShowTabs;
+		}
+
+		/// <summary>
+		/// Save current properties to user settings
+		/// </summary>
+		public void SaveSettings()
+		{
+			_SettingsProvider.IsDarktheme = IsDarkTheme;
+			_SettingsProvider.Brightness = Brightness;
+			_SettingsProvider.Contrast = Contrast;
+			_SettingsProvider.ShowToolbar = ShowToolbar;
+			_SettingsProvider.ShowExplorer = ShowExplorer;
+			_SettingsProvider.ExplorerGridWidth = _SavedExplorerWidth;
+			_SettingsProvider.ShowTabs = ShowTabs;
+
+			_SettingsProvider.Save();
+		}
+
+		/// <summary>
+		/// Set the ExplorerGridWidth to show or hide the explorer
+		/// </summary>
+		private void ShowHideExplorer()
+		{
+			if (ShowExplorer)
+				ExplorerGridWidth = new GridLength(_SavedExplorerWidth);
 			else
-				MaxProcessButtonText = "Not connected";
-		} 
+				ExplorerGridWidth = new GridLength(0);
+		}
+
+
+		private void SetStatus(string status, bool useTimer)
+		{
+			Status = status;
+			if (useTimer)
+			{
+				_Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(5) };
+				_Timer.Tick += (s, e) =>
+				{
+					Status = "";
+					_Timer.Stop();
+				};
+				_Timer.Start();
+			}
+		}
+
+
+		private void GetCommands()
+		{
+			UICommands = new ICommand[]
+			{
+				UpBrightnessCommand, DownBrightnessCommand, UpContrastCommand, DownContrastCommand, ShowToolbarCommand, ShowExplorerCommand, ShowTabsCommand, OpenOptionsCommand
+			};
+
+			GetDatasCommands();
+			GetMaxProcessCommands();
+			GetTextEditorCommands();
+		}
 
 
 		#endregion Methods

@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="SugzEditor.Views.Options.InterfaceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SugzEditor.Views.Options"
+			 xmlns:behav="clr-namespace:SugzTools.Behaviors;assembly=SugzTools" 
+			 xmlns:src="clr-namespace:SugzEditor.Src" 
+			 xmlns:sgzcontrols="clr-namespace:SugzTools.Controls;assembly=SugzTools" 
+			 mc:Ignorable="d" 
+             d:DesignHeight="300" 
+			 d:DesignWidth="300"
+			 Foreground="{DynamicResource MainForeground}"
+			 DataContext="{Binding Main, Source={StaticResource Locator}}">
+
+	<UserControl.Resources>
+		<Style x:Key="{x:Type Rectangle}" TargetType="{x:Type Rectangle}">
+			<Setter Property="Height" Value="1" />
+			<Setter Property="Fill" Value="{DynamicResource ToolbarBorderBrush}" />
+		</Style>
+	</UserControl.Resources>
+
+	<StackPanel behav:Spacing.Vertical="10" 
+				behav:Spacing.LeaveLastItem="True"
+				Margin="5">
+		
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="50" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition  Height="30"/>
+				<RowDefinition  Height="30" />
+				<RowDefinition  Height="30" />
+				<RowDefinition  Height="30"/>
+			</Grid.RowDefinitions>
+			<!--Theme-->
+			<TextBlock Text="Color Theme"
+					   VerticalAlignment="Center" />
+			<ComboBox x:Name="ThemeComboBox"
+					  Grid.Column="2"
+					  SelectionChanged="OnThemeComboBoxSelectionChanged"
+					  VerticalAlignment="Center">
+				<ComboBox.Items>
+					<ComboBoxItem Content="{x:Static src:SgzConstants.ThemeDark}" />
+					<ComboBoxItem Content="{x:Static src:SgzConstants.ThemeLight}" />
+				</ComboBox.Items>
+			</ComboBox>
+			<!--Brightness-->
+			<TextBlock Text="Temperature"
+					   VerticalAlignment="Center"
+					   Grid.Row="1" />
+			<Slider x:Name="TemperatureSlider"
+					Grid.Column="2"
+					Grid.Row="1"
+					Value="{Binding Temperature, Mode=TwoWay}"
+					Maximum="{Binding TemperatureMax}"
+					Minimum="{Binding TemperatureMin}"
+					SmallChange="0.01"
+					LargeChange="0.1"
+					Background="{DynamicResource ToolbarBackground}"
+					Foreground="{DynamicResource ToolbarMouseDown}"
+					MouseRightButtonUp="OnSliderRightClick"
+					VerticalAlignment="Center" />
+			<!--Brightness-->
+			<TextBlock Text="Brightness"
+					   VerticalAlignment="Center"
+					   Grid.Row="1" />
+			<Slider x:Name="BrightnessSlider"
+					Grid.Column="2"
+					Grid.Row="1"
+					Value="{Binding Brightness, Mode=TwoWay}"
+					Maximum="{Binding BrightnessMax}"
+					Minimum="{Binding BrightnessMin}"
+					SmallChange="0.01"
+					LargeChange="0.1"
+					Background="{DynamicResource ToolbarBackground}"
+					Foreground="{DynamicResource ToolbarMouseDown}"
+					MouseRightButtonUp="OnSliderRightClick"
+					VerticalAlignment="Center" />
+			<!--Contrast-->
+			<TextBlock Text="Contrast"
+					   VerticalAlignment="Center"
+					   Grid.Row="2" />
+			<Slider x:Name="ContrastSlider"
+					Grid.Column="2"
+					Grid.Row="2"
+					Value="{Binding Contrast, Mode=TwoWay}"
+					Maximum="{Binding ContrastMax}"
+					Minimum="{Binding ContrastMin}"
+					SmallChange="0.01"
+					LargeChange="0.1"
+					Background="{DynamicResource ToolbarBackground}"
+					Foreground="{DynamicResource ToolbarMouseDown}"
+					MouseRightButtonUp="OnSliderRightClick"
+					VerticalAlignment="Center" />
+		</Grid>
+
+		<Rectangle />
+
+		<!--Panels-->
+		<UniformGrid Margin="-10,0">
+			<DockPanel Margin="10,5">
+				<sgzcontrols:SgzCheckBox Command="{Binding ShowToolbarCommand}" IsChecked="{Binding ShowToolbar, Mode=OneWay}" Style="{StaticResource SwitchButtonStyle}" />
+				<TextBlock Text="{Binding ShowToolbarCommand.Text}" />
+			</DockPanel>
+			<DockPanel Margin="10,5">
+				<sgzcontrols:SgzCheckBox Command="{Binding ShowExplorerCommand}" IsChecked="{Binding ShowExplorer, Mode=OneWay}" Style="{StaticResource SwitchButtonStyle}" />
+				<TextBlock Text="{Binding ShowExplorerCommand.Text}" />
+			</DockPanel>
+			<DockPanel Margin="10,5">
+				<sgzcontrols:SgzCheckBox Command="{Binding ShowTabsCommand}" IsChecked="{Binding ShowTabs, Mode=OneWay}" Style="{StaticResource SwitchButtonStyle}" />
+				<TextBlock Text="{Binding ShowTabsCommand.Text}" />
+			</DockPanel>
+		</UniformGrid>
+
+		<Rectangle />
+		
+		
+
+	</StackPanel>
+</UserControl>

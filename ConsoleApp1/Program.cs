@@ -11,19 +11,20 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Management;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Win32;
 
 namespace ConsoleApp1
 {
 	class Program
 	{
-		
-	
-
 		static void Main(string[] args)
 		{
 			
 
+			Console.ReadKey();
 		}
+
+
 
 
 		#region Process Watcher WMI
@@ -79,12 +80,12 @@ namespace ConsoleApp1
 			ManagementBaseObject targetInstance = (ManagementBaseObject)e.NewEvent.Properties["TargetInstance"].Value;
 			string processName = targetInstance.Properties["Name"].Value.ToString();
 			Console.WriteLine(String.Format("{0} process started", processName));
-		} 
+		}
 
 
 		#endregion Process Watcher WMI
 
-		
+
 	}
 
 

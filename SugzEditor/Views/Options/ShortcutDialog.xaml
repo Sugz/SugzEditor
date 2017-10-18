@@ -1,0 +1,64 @@
+﻿<Window x:Class="SugzEditor.Controls.ShortcutDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SugzEditor.Views.Options"
+        mc:Ignorable="d"
+        Title="ShortcutDialog"
+        Height="150"
+        Width="350"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterOwner"
+        Foreground="{DynamicResource MainForeground}"
+        Background="Transparent">
+
+
+    <Border Background="{DynamicResource MainBackground}"
+            BorderBrush="Black"
+            BorderThickness="1"
+            Margin="10">
+        <Border.Effect>
+            <DropShadowEffect Opacity="0.35"
+                              ShadowDepth="10"
+                              BlurRadius="10" />
+        </Border.Effect>
+        <DockPanel>
+            <TextBlock Text="{Binding CommandName}"
+                       HorizontalAlignment="Center"
+                       Margin="0,5,0,12"
+                       DockPanel.Dock="Top" />
+            <TextBlock x:Name="InputTextBlock"
+                       Text="{Binding Shortcut}"
+                       HorizontalAlignment="Center"
+                       FontSize="20"
+                       Margin="0,0,0,12"
+                       DockPanel.Dock="Top" />
+            <TextBlock Text="{Binding InvalideShortcut}"
+                       HorizontalAlignment="Center"
+                       DockPanel.Dock="Top" />
+            <Grid VerticalAlignment="Bottom"
+				  Background="{DynamicResource ToolbarBackground}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+				<Button Style="{DynamicResource ToolbarButtonStyle}"
+						Height="25"
+						Width="Auto"
+                        Content="Cancel (ESC)"
+                        Click="CancelClick" />
+                <Button Style="{DynamicResource ToolbarButtonStyle}"
+						Height="25"
+                        Width="Auto"
+                        Content="Accept (ENTER)"
+                        Grid.Column="1"
+                        Click="AcceptClick" />
+            </Grid>
+
+
+        </DockPanel>
+
+    </Border>
+</Window>

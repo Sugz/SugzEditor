@@ -1,0 +1,79 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<KeyBinding x:Key="UndoCommand"
+				Command="{Binding UndoCommand}"
+				Modifiers="{Binding UndoCommand.GestureModifiers}"
+				Key="{Binding UndoCommand.GestureKey}" />
+
+	<KeyBinding x:Key="RedoCommand"
+				Command="{Binding RedoCommand}"
+				Modifiers="{Binding RedoCommand.GestureModifiers}"
+				Key="{Binding RedoCommand.GestureKey}" />
+
+
+
+	<KeyBinding x:Key="NewFileCommand"
+				Command="{Binding NewFileCommand}"
+				Modifiers="{Binding NewFileCommand.GestureModifiers}"
+				Key="{Binding NewFileCommand.GestureKey}" />
+
+	<KeyBinding x:Key="OpenFileCommand"
+				Command="{Binding OpenFileCommand}"
+				Modifiers="{Binding OpenFileCommand.GestureModifiers}"
+				Key="{Binding OpenFileCommand.GestureKey}" />
+
+	<KeyBinding x:Key="OpenFolderCommand"
+				Command="{Binding OpenFolderCommand}"
+				Modifiers="{Binding OpenFolderCommand.GestureModifiers}"
+				Key="{Binding OpenFolderCommand.GestureKey}" />
+
+	
+
+	<KeyBinding x:Key="SaveFileCommand"
+				Command="{Binding SaveFileCommand}"
+				Modifiers="{Binding SaveFileCommand.GestureModifiers}"
+				Key="{Binding SaveFileCommand.GestureKey}" />
+
+	<KeyBinding x:Key="SaveFileAsCommand"
+				Command="{Binding SaveFileAsCommand}"
+				Modifiers="{Binding SaveFileAsCommand.GestureModifiers}"
+				Key="{Binding SaveFileAsCommand.GestureKey}" />
+
+	<KeyBinding x:Key="SaveAllCommand"
+				Command="{Binding SaveAllCommand}"
+				Modifiers="{Binding SaveAllCommand.GestureModifiers}"
+				Key="{Binding SaveAllCommand.GestureKey}" />
+
+
+
+
+	<KeyBinding x:Key="UpBrightnessCommand"
+				Command="{Binding UpBrightnessCommand}"
+				Modifiers="{Binding UpBrightnessCommand.GestureModifiers}"
+				Key="{Binding UpBrightnessCommand.GestureKey}" />
+
+	<KeyBinding x:Key="DownBrightnessCommand"
+				Command="{Binding DownBrightnessCommand}"
+				Modifiers="{Binding DownBrightnessCommand.GestureModifiers}"
+				Key="{Binding DownBrightnessCommand.GestureKey}" />
+
+	<KeyBinding x:Key="UpContrastCommand"
+				Command="{Binding UpContrastCommand}"
+				Modifiers="{Binding UpContrastCommand.GestureModifiers}"
+				Key="{Binding UpContrastCommand.GestureKey}" />
+
+	<KeyBinding x:Key="DownContrastCommand"
+				Command="{Binding DownContrastCommand}"
+				Modifiers="{Binding DownContrastCommand.GestureModifiers}"
+				Key="{Binding DownContrastCommand.GestureKey}" />
+
+
+
+	<KeyBinding x:Key="GetMaxProcessCommand"
+				Command="{Binding GetMaxProcessCommand}"
+				Modifiers="{Binding GetMaxProcessCommand.GestureModifiers}"
+				Key="{Binding GetMaxProcessCommand.GestureKey}" />
+
+
+</ResourceDictionary>
